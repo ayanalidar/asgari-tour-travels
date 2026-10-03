@@ -2,7 +2,15 @@
 
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { ArrowRight, MapPin } from "lucide-react"
+import {
+  ArrowRight,
+  MapPin,
+  Clock,
+  Mountain,
+  Calendar,
+  Sparkles,
+  Star,
+} from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { DestinationImage } from "./DestinationImage"
 import type { DestinationT } from "@/lib/types"
@@ -10,9 +18,25 @@ import type { DestinationT } from "@/lib/types"
 interface DestinationCardProps {
   destination: DestinationT
   index?: number
+  compact?: boolean
 }
 
-export function DestinationCard({ destination, index = 0 }: DestinationCardProps) {
+// Derive a short season label from bestTimeToVisit text
+function seasonLabel(text: string | null): { label: string; emoji: string } | null {
+  if (!text) return null
+  const t = text.toLowerCase()
+  if (/(dec|jan|feb)/.test(t)) return { label: "Winter", emoji: "❄️" }
+  if (/(mar|apr|may)/.test(t)) return { label: "Spring", emoji: "🌷" }
+  if (/(jun|jul|aug)/.test(t)) return { label: "Summer", emoji: "☀️" }
+  if (/(sep|oct|nov)/.test(t)) return { label: "Autumn", emoji: "🍂" }
+  return { label: "Year-round", emoji: "🌟" }
+}
+
+export function DestinationCard({
+  destination,
+  index = 0,
+  compact = false,
+}: DestinationCardProps) {
   const regionLabel =
     destination.region === "ladakh"
       ? "Ladakh"
@@ -27,17 +51,24 @@ export function DestinationCard({ destination, index = 0 }: DestinationCardProps
         ? "border-rose-400/40 bg-rose-400/10 text-rose-300"
         : "border-primary/40 bg-primary/10 text-primary"
 
+  const season = seasonLabel(destination.bestTimeToVisit)
+  const isFeatured = destination.featured
+  const isPopular = destination.popular
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.5, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
-      className="lift group relative overflow-hidden rounded-2xl glass"
+      className="lift group relative"
     >
+      {/* Animated gradient border on hover */}
+      <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-primary/0 via-primary/0 to-accent/0 opacity-0 blur-sm transition-all duration-500 group-hover:from-primary/40 group-hover:via-primary/20 group-hover:to-accent/40 group-hover:opacity-100" />
+
       <Link
         href={`/destinations/${destination.slug}`}
-        className="flex flex-col"
+        className="relative flex flex-col overflow-hidden rounded-2xl glass"
         aria-label={`Explore ${destination.name}`}
       >
         {/* Image */}
@@ -49,43 +80,94 @@ export function DestinationCard({ destination, index = 0 }: DestinationCardProps
             className="transition-transform duration-700 group-hover:scale-110"
             eager={index < 4}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
-          {/* Region badge */}
-          <div className="absolute left-3 top-3">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent" />
+
+          {/* Top row: region + featured */}
+          <div className="absolute left-3 top-3 flex items-center gap-2">
             <Badge className={`${regionColor} border backdrop-blur-md`}>
               <MapPin className="size-3" /> {regionLabel}
             </Badge>
+            {isFeatured && (
+              <span className="inline-flex items-center gap-1 rounded-full border border-primary/40 bg-primary/20 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-primary backdrop-blur-md">
+                <Sparkles className="size-2.5" /> Featured
+              </span>
+            )}
           </div>
-          {/* Category */}
+
+          {/* Category chip */}
           <div className="absolute right-3 top-3">
             <span className="rounded-full border border-white/15 bg-black/40 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-white/90 backdrop-blur-md">
               {destination.category}
             </span>
           </div>
-          {/* Title overlay */}
-          <div className="absolute inset-x-0 bottom-0 p-4">
+
+          {/* Hover overlay quick facts */}
+          <div className="absolute inset-0 flex items-end opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            <div className="w-full bg-gradient-to-t from-black/90 to-transparent p-4 pt-12">
+              <div className="flex flex-wrap items-center gap-3 text-[11px] text-white/90">
+                {season && (
+                  <span className="flex items-center gap-1 rounded-md bg-white/10 px-2 py-1">
+                    <Calendar className="size-3 text-primary" /> {season.emoji} {season.label}
+                  </span>
+                )}
+                {destination.altitude && (
+                  <span className="flex items-center gap-1 rounded-md bg-white/10 px-2 py-1">
+                    <Mountain className="size-3 text-accent" /> {destination.altitude}
+                  </span>
+                )}
+                {destination.distance && (
+                  <span className="flex items-center gap-1 rounded-md bg-white/10 px-2 py-1">
+                    <MapPin className="size-3 text-rose-300" />
+                    {destination.distance.replace(/^From\s.*/, "").trim() || destination.distance}
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Title overlay (always visible) */}
+          <div className="absolute inset-x-0 bottom-0 p-4 transition-transform duration-300 group-hover:translate-y-1">
             <h3 className="font-display text-xl font-bold leading-tight text-white drop-shadow-lg">
               {destination.name}
             </h3>
-            {destination.tagline && (
+            {!compact && destination.tagline && (
               <p className="mt-1 line-clamp-2 text-xs text-white/75">
                 {destination.tagline}
               </p>
             )}
           </div>
         </div>
+
         {/* Body */}
         <div className="flex flex-1 flex-col gap-3 p-4">
-          <p className="line-clamp-2 text-sm text-muted-foreground">
-            {destination.shortDescription}
-          </p>
-          <div className="mt-auto flex items-center justify-between">
+          {!compact && (
+            <p className="line-clamp-2 text-sm text-muted-foreground">
+              {destination.shortDescription}
+            </p>
+          )}
+          {/* Quick stats row */}
+          <div className="flex items-center gap-3 text-[11px] text-muted-foreground">
             {destination.duration && (
-              <span className="text-xs text-muted-foreground">
-                ⏱ {destination.duration}
+              <span className="flex items-center gap-1">
+                <Clock className="size-3" /> {destination.duration}
               </span>
             )}
-            <span className="ml-auto inline-flex items-center gap-1 text-sm font-semibold text-primary transition-transform group-hover:translate-x-1">
+            {season && (
+              <span className="flex items-center gap-1">
+                <Calendar className="size-3" /> {season.label}
+              </span>
+            )}
+            {isPopular && (
+              <span className="flex items-center gap-1 text-amber-400">
+                <Star className="size-3 fill-current" /> Popular
+              </span>
+            )}
+          </div>
+          <div className="mt-auto flex items-center justify-between border-t border-border/40 pt-3">
+            <span className="text-xs font-medium text-muted-foreground">
+              {destination.thingsToDo?.length ?? 0} things to do
+            </span>
+            <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary transition-transform group-hover:translate-x-1">
               Explore <ArrowRight className="size-4" />
             </span>
           </div>

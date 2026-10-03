@@ -1,11 +1,12 @@
-import { getSettings } from "@/lib/settings"
 import {
   getFeaturedDestinations,
   getFeaturedPackages,
   getPopularPackages,
   getFeaturedTestimonials,
   getAllBlogPosts,
+  getAllDestinations,
 } from "@/lib/queries"
+import { getSettings } from "@/lib/settings"
 import { PublicLayout } from "@/components/site/PublicLayout"
 import { Hero } from "@/components/site/Hero"
 import { SectionHeading } from "@/components/site/SectionHeading"
@@ -17,6 +18,7 @@ import { CTASection } from "@/components/site/CTASection"
 import { StatsCounter } from "@/components/site/StatsCounter"
 import { RatingBadge } from "@/components/site/RatingBadge"
 import { RatingBadgesRow } from "@/components/site/RatingBadgesRow"
+import { SeasonExplorer } from "@/components/site/SeasonExplorer"
 import { Button } from "@/components/ui/button"
 import {
   ShieldCheck,
@@ -33,21 +35,32 @@ import {
   Palmtree,
   Camera,
   Star,
+  Calculator,
+  Route,
+  CalendarCheck,
 } from "lucide-react"
 import Link from "next/link"
 
 export const revalidate = 600
 
 export default async function HomePage() {
-  const [settings, destinations, popular, featuredPackages, testimonials, posts] =
-    await Promise.all([
-      getSettings(),
-      getFeaturedDestinations(8),
-      getPopularPackages(4),
-      getFeaturedPackages(6),
-      getFeaturedTestimonials(6),
-      getAllBlogPosts(),
-    ])
+  const [
+    settings,
+    destinations,
+    popular,
+    featuredPackages,
+    testimonials,
+    posts,
+    allDestinations,
+  ] = await Promise.all([
+    getSettings(),
+    getFeaturedDestinations(8),
+    getPopularPackages(4),
+    getFeaturedPackages(6),
+    getFeaturedTestimonials(6),
+    getAllBlogPosts(),
+    getAllDestinations(),
+  ])
 
   const heroStats = {
     travelers: settings.stats_travelers ?? 15000,
@@ -120,6 +133,72 @@ export default async function HomePage() {
               View all destinations <ArrowRight className="size-4" />
             </Link>
           </Button>
+        </div>
+      </Section>
+
+      {/* Season Explorer — interactive best-time-to-visit */}
+      <Section id="seasons" className="py-16 sm:py-24 relative overflow-hidden bg-gradient-to-b from-transparent via-accent/[0.03] to-transparent">
+        <div className="absolute inset-0 -z-10 grid-overlay opacity-20 pointer-events-none" />
+        <SectionHeading
+          eyebrow="Best Time to Visit"
+          title={
+            <>
+              Every season, a new <span className="gradient-text-mix">paradise</span>
+            </>
+          }
+          subtitle="Kashmir & Ladakh transform through the year. Tap a season to discover the destinations at their peak."
+        />
+        <SeasonExplorer destinations={allDestinations} />
+      </Section>
+
+      {/* Plan-Your-Trip teaser */}
+      <Section className="py-16 sm:py-24">
+        <div className="relative overflow-hidden rounded-3xl glass-strong p-8 sm:p-12">
+          <div className="absolute -right-20 -top-20 size-72 rounded-full bg-primary/20 blur-3xl" />
+          <div className="absolute -bottom-20 -left-20 size-64 rounded-full bg-accent/20 blur-3xl" />
+          <div className="relative z-10 grid items-center gap-8 lg:grid-cols-2">
+            <div>
+              <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
+                <Route className="size-3.5" /> New: Trip Planner
+              </span>
+              <h2 className="mt-4 font-display text-3xl font-extrabold leading-tight sm:text-4xl">
+                Build your trip in{" "}
+                <span className="gradient-text-saffron">4 steps</span>
+              </h2>
+              <p className="mt-3 text-base text-muted-foreground">
+                Pick destinations, dates & budget — our trip wizard + budget calculator craft a
+                custom itinerary in 24 hours. No templates, no upfront payment.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Button asChild size="lg" className="btn-glow">
+                  <Link href="/plan-your-trip">
+                    <Calculator className="size-4" /> Plan my trip
+                  </Link>
+                </Button>
+                <Button asChild size="lg" variant="outline">
+                  <Link href="/packages">
+                    <CalendarCheck className="size-4" /> Browse packages
+                  </Link>
+                </Button>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                { icon: <Route className="size-5" />, t: "4-Step Wizard", d: "Destinations → dates → group → done" },
+                { icon: <Calculator className="size-5" />, t: "Live Budget", d: "Per-person & total estimates" },
+                { icon: <CalendarCheck className="size-5" />, t: "24h Turnaround", d: "Custom itinerary, fast" },
+                { icon: <Wallet className="size-5" />, t: "No Upfront", d: "Pay only after approval" },
+              ].map((f, i) => (
+                <div key={i} className="rounded-2xl glass p-4">
+                  <span className="grid size-10 place-items-center rounded-lg bg-primary/15 text-primary">
+                    {f.icon}
+                  </span>
+                  <h4 className="mt-3 text-sm font-bold">{f.t}</h4>
+                  <p className="mt-1 text-xs text-muted-foreground">{f.d}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </Section>
 

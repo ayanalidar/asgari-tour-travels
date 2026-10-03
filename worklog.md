@@ -199,3 +199,49 @@ Unresolved / Next Steps:
 - ladakh-monastery image: retry with alternative prompt (content filter blocked it)
 - Agent-browser full verification: constrained by 4GB RAM — cron job will handle this
 - Future enhancements (for cron job to pick up): more blog posts, more activities, booking flow, payment integration, user accounts, multi-language support, more destination images
+
+---
+Task ID: 5 (cron review round 1)
+Agent: web-dev reviewer (cron)
+Task: QA verification, new features (SeasonExplorer, Budget Calculator, Trip Wizard, /plan-your-trip page), enhanced DestinationCard styling, 4 new blog posts
+
+Current Project Status:
+- Project was stable & complete from Tasks 1-4 (36 destinations, 6 packages, full CMS, 13 images)
+- Dev server confirmed compiling & serving all key routes (200 responses via curl)
+- Memory constraint persists: 4GB sandbox OOM-kills next-server when Chrome loads pages (documented). Each page compiles correctly individually with NODE_OPTIONS='--max-old-space-size=896' and 8s GC pauses between curls.
+- Lint remained 100% clean throughout (0 errors, 0 warnings)
+
+Work Log:
+- **QA**: Verified server starts, routes compile & return 200 (/, /destinations, /packages, /plan-your-trip, /api/public/blog). Confirmed blog API returns 10 posts. agent-browser verification blocked by 4GB memory limit (server OOM-killed when Chrome loads — environment limitation, not code issue).
+
+NEW FEATURES BUILT:
+1. **SeasonExplorer** (src/components/site/SeasonExplorer.tsx) — interactive best-time-to-visit visualizer on the landing page. 4 season tabs (Spring/Summer/Autumn/Winter) with Framer Motion transitions; filters destinations by season derived from bestTimeToVisit text; shows active season description + 6 destination mini-cards. Added to landing page as new "Best Time to Visit" section.
+
+2. **BudgetCalculator** (src/components/site/BudgetCalculator.tsx) — live budget estimator with sliders for group size (1-12), duration (2-14 nights), region (Kashmir/Ladakh/Both), tier (Standard/Premium/Luxury). Calculates per-person + total price with group discounts. Animated price display with Framer Motion. Lists inclusions.
+
+3. **TripWizard** (src/components/site/TripWizard.tsx) — 4-step custom trip request wizard: (1) pick destinations, (2) dates/flexibility/duration, (3) group size + budget, (4) contact details → submits to /api/public/leads with source="trip-wizard". Progress stepper, animated transitions, success state with PartyPopper celebration.
+
+4. **/plan-your-trip page** (src/app/plan-your-trip/page.tsx) — new SEO page combining BudgetCalculator + TripWizard + hero + stats band + CTA. Full metadata. Links from landing page teaser + navbar.
+
+STYLING IMPROVEMENTS:
+5. **Enhanced DestinationCard** (src/components/site/DestinationCard.tsx) — added: animated gradient border on hover, season badge (derived from bestTimeToVisit), altitude chip, distance chip, "things to do" count, Featured/Popular badges, hover overlay with quick facts, better gradient overlays. More micro-interactions.
+
+6. **Landing page enhancements** — added SeasonExplorer section ("Every season, a new paradise"), Plan-Your-Trip teaser section with 4 feature cards (4-Step Wizard, Live Budget, 24h Turnaround, No Upfront), new section icons (Calculator, Route, CalendarCheck).
+
+CONTENT:
+7. **4 new blog posts** seeded (prisma/seed-more-blog.ts): "Top 15 Things to Do in Srinagar", "Pangong Lake Ultimate Guide", "Kashmir in Winter: Snow-Globe Paradise", "Ladakh Monasteries Guide". Total blog posts now 10 (was 6). Verified via /api/public/blog.
+
+Verification Results:
+- `bun run lint` → 0 errors, 0 warnings ✓
+- `/plan-your-trip` → 200 (189KB HTML, Budget Estimator + Trip Wizard + Custom Trip Planner content confirmed) ✓
+- `/` landing page → 200 (SeasonExplorer "Every season", "Best Time to Visit", Plan-Your-Trip teaser "Plan my trip", "Trip Planner", "4 steps" confirmed via grep) ✓
+- `/destinations` → 200 (480KB, enhanced DestinationCard features: Featured, Popular, "things to do", Explore confirmed) ✓
+- `/api/public/blog` → returns 10 blog posts (4 new slugs confirmed: pangong-lake-travel-guide, things-to-do-in-srinagar, kashmir-in-winter-guide, ladakh-monasteries-guide) ✓
+- agent-browser → blocked by 4GB OOM (server killed when Chrome loads; each page verified via curl instead)
+
+Unresolved / Next Steps:
+- agent-browser full-page verification: persistently blocked by 4GB RAM. Consider reducing client-side JS or using production build for QA.
+- More destination images: only 13 of 36 destinations have hero images; generate more for Yusmarg, Doodhpathri, Kokernag, Turtuk, Hanle, etc.
+- Ladakh monastery image: still content-filtered; retry with safe prompt
+- Future feature ideas: destination comparison tool, weather widget, multi-language (Hindi/Arabic), user accounts + saved trips, payment integration, real-time availability calendar
+- The recurring 15-min cron job (job_id: 434245) will continue picking up these in subsequent rounds
