@@ -293,3 +293,40 @@ Unresolved / Next Steps:
 - Ladakh monastery image (ladakh-monastery.png) still missing (content filter blocked original prompt) — used as fallback for Thiksey/Hemis/Diskit/Sham Valley/Alchi/Lamayuru monasteries; generate with ultra-safe prompt in next round
 - Future feature ideas: destination "weather widget", multi-language (Hindi/Arabic), user accounts + saved trips/wishlist, payment integration, real-time availability calendar, destination map with pins, package "Book Now" flow with date picker
 - The recurring 15-min cron job (job_id: 434245) will continue picking up these in subsequent rounds
+
+---
+Task ID: 7 (cron review round 3)
+Agent: web-dev reviewer (cron)
+Task: QA verification, global search command palette, package booking modal, 4 new packages, testimonials carousel
+
+Current Project Status:
+- Project stable from Tasks 1-6 (36 destinations all with images, 6 packages, 10 blog posts, full CMS, comparison tool, gallery lightbox, scroll progress, SeasonExplorer, BudgetCalculator, TripWizard)
+- Dev server confirmed compiling & serving key routes (200 responses via curl)
+- Memory constraint persists: 4GB sandbox OOM-kills next-server during cumulative route compilation. Each page compiles correctly individually with NODE_OPTIONS='--max-old-space-size=896'.
+- Lint remained 100% clean throughout (0 errors, 0 warnings)
+
+Work Log:
+- **QA**: Verified server starts, search API works, routes return 200. agent-browser still blocked by 4GB memory (documented).
+
+NEW FEATURES BUILT:
+1. **Global Search Command Palette** (src/components/site/GlobalSearch.tsx + src/app/api/public/search/route.ts) — a Ctrl+K / Cmd+K searchable command palette integrated into the Navbar. Searches across all 36 destinations, 10 packages & 10 blog posts in real-time (250ms debounce). Features: Framer Motion modal, keyboard navigation (↑↓ arrows + Enter to select, Esc to close), grouped results (Destinations/Packages/Blog) with thumbnail images & badges, suggested search chips (Srinagar, Gulmarg, Pangong, Honeymoon, Skiing, Ladakh), result counter, responsive. API endpoint uses Prisma OR queries across name/tagline/description/region/category fields. Verified: searching "srinagar" returns 5 destinations, 5 packages, 2 blog posts.
+
+2. **Package Booking Modal** (src/components/site/BookingModal.tsx + src/components/site/BookingButton.tsx) — a 2-step booking flow on package pages: (1) trip details (travel date, group size slider 1-15, coupon code with live validation), (2) contact details (name, email, phone, special requests). Includes live price calculation (per-person × group size, coupon discount, total + savings), stepper progress, PartyPopper success state. Submits to /api/public/leads with source="booking-modal". Added to package detail pages replacing the old anchor-based "Book Now" button. Verified: "Book Now" + "Free cancellation" + "Kashmir Family Holiday" confirmed on package page.
+
+3. **Testimonials Carousel** (src/components/site/TestimonialCarousel.tsx) — auto-scrolling featured testimonial carousel on the landing page (replaces the static grid). Features: auto-play (5s interval, pauses on hover), Framer Motion slide transitions, star ratings, quote icon, avatar, author + location + source badge, prev/next buttons, clickable dot indicators with active expansion, pause-on-hover. Added to landing page testimonials section.
+
+CONTENT:
+4. **4 new tour packages** seeded (prisma/seed-more-packages.ts): "Kashmir Family Holiday 6N/7D" (family-friendly, pony rides, Yusmarg picnic), "Ladakh Photography Expedition 8N/9D" (astrophotography at Hanle, golden hour at Pangong, Tso Moriri), "Kashmir Cultural & Craft Trail 4N/5D" (saffron harvest, pashmina, paper-mâché, Wazwan cooking class), "Ladakh Monastery Circuit 5N/6D" (Thiksey dawn prayers, Alchi murals, Hemis, Lamayuru). Total packages now 10 (was 6). All with full itineraries, cover images mapped. Verified via /api/public/packages (10 packages confirmed).
+
+Verification Results:
+- `bun run lint` → 0 errors, 0 warnings ✓
+- `/api/public/search?q=srinagar` → 5 destinations, 5 packages, 2 blog posts ✓
+- `/` landing page → 200 (780KB, TestimonialCarousel + GlobalSearch trigger "Search" + "⌘K" + "Loved by" confirmed) ✓
+- `/packages/kashmir-family-holiday-6n7d` → 200 (418KB, "Book Now" + "Free cancellation" + "Kashmir Family Holiday" confirmed) ✓
+- `/api/public/packages` → 10 packages (4 new confirmed) ✓
+- All 10 packages have cover images ✓
+
+Unresolved / Next Steps:
+- agent-browser full-page verification: persistently blocked by 4GB RAM (server OOM-killed when Chrome loads; each page verified via curl instead)
+- Future feature ideas: interactive destination map with pins, weather/season widget, multi-language (Hindi/Arabic), user accounts + saved trips/wishlist, payment integration, real-time availability calendar, exit-intent newsletter popup, blog search/filtering
+- The recurring 15-min cron job (job_id: 434245) will continue picking up these in subsequent rounds

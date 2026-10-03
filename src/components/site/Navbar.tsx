@@ -25,6 +25,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import { cn } from "@/lib/utils"
+import { GlobalSearch } from "./GlobalSearch"
 
 interface NavLink {
   href: string
@@ -161,6 +162,7 @@ export function Navbar({ settings }: { settings?: Record<string, any> }) {
 
           {/* CTA */}
           <div className="hidden lg:flex items-center gap-2">
+            <GlobalSearch />
             <Button
               asChild
               variant="ghost"

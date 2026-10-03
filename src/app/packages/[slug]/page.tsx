@@ -25,6 +25,7 @@ import { CouponInput } from "@/components/site/CouponInput"
 import { EnquiryForm } from "@/components/site/EnquiryForm"
 import { CTASection } from "@/components/site/CTASection"
 import { TestimonialCard } from "@/components/site/TestimonialCard"
+import { BookingButton } from "@/components/site/BookingButton"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
@@ -203,9 +204,20 @@ export default async function PackageDetailPage({ params }: Props) {
               )}
             </div>
             <div className="ml-auto flex flex-col gap-2">
-              <Button asChild size="lg" className="btn-glow">
-                <a href="#enquiry">Book Now</a>
-              </Button>
+              <BookingButton
+                pkg={{
+                  id: p.id,
+                  title: p.title,
+                  slug: p.slug,
+                  price: p.price,
+                  discountPrice: p.discountPrice,
+                  durationDays: p.durationDays,
+                  durationNights: p.durationNights,
+                  currency: p.currency,
+                }}
+                size="lg"
+                fullWidth
+              />
               <span className="text-xs text-center text-muted-foreground">
                 Free cancellation up to 15 days
               </span>

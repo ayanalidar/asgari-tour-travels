@@ -14,6 +14,7 @@ import { DestinationCard } from "@/components/site/DestinationCard"
 import { PackageCard } from "@/components/site/PackageCard"
 import { BlogCard } from "@/components/site/BlogCard"
 import { TestimonialCard } from "@/components/site/TestimonialCard"
+import { TestimonialCarousel } from "@/components/site/TestimonialCarousel"
 import { CTASection } from "@/components/site/CTASection"
 import { StatsCounter } from "@/components/site/StatsCounter"
 import { RatingBadge } from "@/components/site/RatingBadge"
@@ -265,10 +266,9 @@ export default async function HomePage() {
         <div className="mt-8 flex justify-center">
           <RatingBadge rating={rating} reviewCount={reviewCount} />
         </div>
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {testimonials.map((t, i) => (
-            <TestimonialCard key={t.id} testimonial={t} index={i} />
-          ))}
+        {/* Featured testimonial carousel */}
+        <div className="mt-10 max-w-3xl mx-auto">
+          <TestimonialCarousel testimonials={testimonials} />
         </div>
       </Section>
 
