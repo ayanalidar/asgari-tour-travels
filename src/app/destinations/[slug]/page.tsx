@@ -25,6 +25,7 @@ import { DestinationImage } from "@/components/site/DestinationImage"
 import { PackageCard } from "@/components/site/PackageCard"
 import { CTASection } from "@/components/site/CTASection"
 import { EnquiryForm } from "@/components/site/EnquiryForm"
+import { GalleryLightbox } from "@/components/site/GalleryLightbox"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 
@@ -72,6 +73,12 @@ export default async function DestinationDetailPage({ params }: Props) {
     .slice(0, 4)
 
   const thingsToDo = d.thingsToDo ?? []
+
+  // Build gallery images: hero image + any stored images
+  const galleryImages = [
+    ...(d.heroImage ? [d.heroImage] : []),
+    ...(d.images ?? []),
+  ].filter(Boolean)
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -195,6 +202,17 @@ export default async function DestinationDetailPage({ params }: Props) {
                 {d.description}
               </div>
             </div>
+
+            {/* Photo Gallery */}
+            {galleryImages.length > 0 && (
+              <div className="rounded-2xl glass p-6 sm:p-8">
+                <h2 className="font-display text-2xl font-bold mb-4 heading-underline">
+                  <Camera className="inline size-6 mr-2 text-primary" />
+                  Photo Gallery
+                </h2>
+                <GalleryLightbox images={galleryImages} alt={d.name} />
+              </div>
+            )}
 
             {/* Things to do */}
             {thingsToDo.length > 0 && (

@@ -1,10 +1,13 @@
 import type { Metadata } from "next"
+import Link from "next/link"
+import { GitCompare, ArrowRight } from "lucide-react"
 import { getSettings } from "@/lib/settings"
 import { getAllDestinations } from "@/lib/queries"
 import { PublicLayout } from "@/components/site/PublicLayout"
 import { PageHeader } from "@/components/site/PageHeader"
 import { DestinationsExplorer } from "@/components/site/DestinationsExplorer"
 import { Breadcrumbs } from "@/components/site/Breadcrumbs"
+import { Button } from "@/components/ui/button"
 
 export const revalidate = 600
 
@@ -53,6 +56,31 @@ export default async function DestinationsPage({
           initialCategory={initialCategory}
           initialQuery={initialQuery}
         />
+
+        {/* Compare CTA */}
+        <div className="mt-12 relative overflow-hidden rounded-2xl glass-strong p-6 sm:p-8">
+          <div className="absolute -right-12 -top-12 size-40 rounded-full bg-primary/15 blur-3xl" />
+          <div className="relative z-10 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+            <div className="flex items-start gap-4">
+              <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-primary/15 text-primary ring-1 ring-primary/25">
+                <GitCompare className="size-6" />
+              </span>
+              <div>
+                <h3 className="font-display text-lg font-bold">
+                  Can't decide between destinations?
+                </h3>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Compare up to 3 destinations side by side — altitude, best time, things to do & more.
+                </p>
+              </div>
+            </div>
+            <Button asChild size="lg" className="btn-glow shrink-0">
+              <Link href="/compare">
+                Compare now <ArrowRight className="size-4" />
+              </Link>
+            </Button>
+          </div>
+        </div>
       </div>
     </PublicLayout>
   )

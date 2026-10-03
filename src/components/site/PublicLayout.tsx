@@ -1,6 +1,7 @@
 import { Navbar } from "./Navbar"
 import { Footer } from "./Footer"
 import { WhatsAppButton } from "./WhatsAppButton"
+import { ScrollProgress } from "./ScrollProgress"
 
 interface PublicLayoutProps {
   settings?: Record<string, any>
@@ -14,6 +15,7 @@ interface PublicLayoutProps {
 export function PublicLayout({ settings = {}, children }: PublicLayoutProps) {
   return (
     <>
+      <ScrollProgress />
       <Navbar settings={settings} />
       <main className="flex-1 flex flex-col">{children}</main>
       <Footer settings={settings} />

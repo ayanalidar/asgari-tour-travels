@@ -245,3 +245,51 @@ Unresolved / Next Steps:
 - Ladakh monastery image: still content-filtered; retry with safe prompt
 - Future feature ideas: destination comparison tool, weather widget, multi-language (Hindi/Arabic), user accounts + saved trips, payment integration, real-time availability calendar
 - The recurring 15-min cron job (job_id: 434245) will continue picking up these in subsequent rounds
+
+---
+Task ID: 6 (cron review round 2)
+Agent: web-dev reviewer (cron)
+Task: QA verification, generate 17 more destination images, build destination comparison tool, photo gallery lightbox, scroll progress + back-to-top, navbar updates
+
+Current Project Status:
+- Project stable from Tasks 1-5 (36 destinations, 6 packages, 10 blog posts, full CMS, 13 images, SeasonExplorer, BudgetCalculator, TripWizard, /plan-your-trip, enhanced DestinationCard)
+- Dev server confirmed compiling & serving key routes (200 responses via curl)
+- Memory constraint persists: 4GB sandbox OOM-kills next-server during cumulative route compilation. Each page compiles correctly individually with NODE_OPTIONS='--max-old-space-size=896' and GC pauses.
+- Lint remained 100% clean throughout (0 errors, 0 warnings)
+
+Work Log:
+- **QA**: Verified server starts, routes return 200 (/, /compare, /destinations, /destinations/srinagar, /plan-your-trip). agent-browser verification still blocked by 4GB memory (documented).
+
+NEW IMAGES GENERATED:
+- Generated 17 new destination images via z-ai-web-dev-sdk (scripts/gen-dest.ts), one at a time with 90s timeouts per image to avoid API hangs:
+  yusmarg, doodhpathri, kokernag, verinag, aharbal, daksum, sinthan-top, lolab-valley, bangus-valley, gangabal-lake, tarsar-marsar-lakes, magnetic-hill, zanskar-valley, tso-moriri, tso-kar, turtuk, hanle
+- Total images now 30 (was 13). ALL 36 destinations now have hero images mapped in DB + image-map.ts.
+- Ran scripts/map-all-images.ts to map all images to destinations in the database.
+
+NEW FEATURES BUILT:
+1. **Destination Comparison Tool** (src/components/site/CompareTool.tsx + src/app/compare/page.tsx) — new /compare page where users select up to 3 destinations and see a side-by-side comparison: hero image, tagline, category, altitude, best time, duration, distance, how to reach, things to do (with checkmarks), and overview. Includes a searchable destination picker modal with image thumbnails. Framer Motion animations. Full SEO metadata.
+
+2. **Photo Gallery Lightbox** (src/components/site/GalleryLightbox.tsx) — full-featured image gallery with: thumbnail grid (6 thumbs with "+N more" overflow), full-screen lightbox with keyboard navigation (Esc/Arrow keys), image counter, thumbnail strip at bottom, Framer Motion transitions, click-outside-to-close. Added to destination detail pages in a new "Photo Gallery" section after the "About" description. Uses heroImage + destination images array.
+
+STYLING IMPROVEMENTS:
+3. **ScrollProgress + Back-to-Top** (src/components/site/ScrollProgress.tsx) — added to PublicLayout: a gradient progress bar at the top of the viewport tracking scroll position (Framer Motion useScroll + useSpring), plus a floating "back to top" button that appears after 600px scroll with smooth scroll-to-top behavior. Both appear on all public pages.
+
+4. **Navbar updates** — added "Compare" and "Plan Trip" links to the main navigation, replacing "Things To Do" (still accessible via /things-to-do direct URL). Updated NAV_LINKS array.
+
+5. **Destinations page Compare CTA** — added a glass-strong banner at the bottom of /destinations with "Can't decide between destinations?" headline + "Compare now" button linking to /compare.
+
+Verification Results:
+- `bun run lint` → 0 errors, 0 warnings ✓
+- `/compare` → 200 (220KB HTML, "Destination Comparison" + "side by side" content confirmed) ✓
+- `/destinations` → 200 (486KB, "Can't decide" + "Compare now" + "side by side" CTA confirmed) ✓
+- `/destinations/srinagar` → 200 (390KB, "Photo Gallery" + "GalleryLightbox" + "Things To Do" confirmed) ✓
+- `/plan-your-trip` → 200 ✓
+- `/` → 200 ✓
+- `/uploads/yusmarg.png` → 200 (new destination images serve correctly) ✓
+- 30 images in /public/uploads/, all 36 destinations have heroImage in DB ✓
+
+Unresolved / Next Steps:
+- agent-browser full-page verification: persistently blocked by 4GB RAM (server OOM-killed when Chrome loads; each page verified via curl instead)
+- Ladakh monastery image (ladakh-monastery.png) still missing (content filter blocked original prompt) — used as fallback for Thiksey/Hemis/Diskit/Sham Valley/Alchi/Lamayuru monasteries; generate with ultra-safe prompt in next round
+- Future feature ideas: destination "weather widget", multi-language (Hindi/Arabic), user accounts + saved trips/wishlist, payment integration, real-time availability calendar, destination map with pins, package "Book Now" flow with date picker
+- The recurring 15-min cron job (job_id: 434245) will continue picking up these in subsequent rounds
