@@ -1,0 +1,295 @@
+// Asgari Tour & Travels — Prisma schema
+// learn more: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================
+// DESTINATIONS — SEO pages for Kashmir & Ladakh locations
+// ============================================================
+model Destination {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  name            String
+  region          String   @default("kashmir") // kashmir | ladakh | jammu
+  category        String   @default("destination") // destination | lake | garden | meadow | peak | monastery | pass | town
+  tagline         String?
+  shortDescription String
+  description     String   // rich / markdown
+  heroImage       String?
+  images          String   @default("[]") // JSON array of urls
+  bestTimeToVisit String?
+  duration        String?
+  altitude        String?
+  distance        String?  // from Srinagar/Leh
+  howToReach      String?
+  thingsToDo      String   @default("[]") // JSON array
+  latitude        Float?
+  longitude       Float?
+  metaTitle       String?
+  metaDescription String?
+  metaKeywords    String?
+  featured        Boolean  @default(false)
+  popular         Boolean  @default(false)
+  order           Int      @default(0)
+  status          String   @default("published") // draft | published
+  createdAt       DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  activities      Activity[]
+  packageDest    PackageDestination[]
+  galleryImages  GalleryImage[]
+}
+
+// ============================================================
+// THINGS TO DO / ACTIVITIES — SEO pages
+// ============================================================
+model Activity {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  title           String
+  category        String   @default("adventure") // adventure | cultural | nature | religious | leisure
+  shortDescription String
+  description     String
+  images          String   @default("[]")
+  duration        String?
+  difficulty      String?
+  bestSeason      String?
+  destinationId   String?
+  destination     Destination? @relation(fields: [destinationId], references: [id], onDelete: SetNull)
+  metaTitle       String?
+  metaDescription String?
+  featured        Boolean  @default(false)
+  order           Int      @default(0)
+  status          String   @default("published")
+  createdAt       DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+// ============================================================
+// TOUR PACKAGES
+// ============================================================
+model TourPackage {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  title           String
+  subtitle        String?
+  shortDescription String
+  description     String
+  durationDays    Int      @default(3)
+  durationNights  Int      @default(2)
+  price           Float    @default(0)
+  discountPrice   Float?
+  currency        String   @default("INR")
+  inclusions      String   @default("[]") // JSON
+  exclusions     String   @default("[]") // JSON
+  highlights     String   @default("[]") // JSON
+  itinerary       String   @default("[]") // JSON: [{day, title, description}]
+  images          String   @default("[]")
+  coverImage      String?
+  rating          Float    @default(4.5)
+  reviewCount     Int      @default(0)
+  groupSize      String?
+  difficulty      String?
+  destinations    PackageDestination[]
+  coupons         PackageCoupon[]
+  testimonials    Testimonial[]
+  metaTitle       String?
+  metaDescription String?
+  featured        Boolean  @default(false)
+  popular         Boolean  @default(false)
+  status          String   @default("published") // draft | published
+  order           Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model PackageDestination {
+  packageId      String
+  destinationId  String
+  package        TourPackage @relation(fields: [packageId], references: [id], onDelete: Cascade)
+  destination    Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+  order          Int     @default(0)
+  @@id([packageId, destinationId])
+}
+
+// ============================================================
+// COUPONS
+// ============================================================
+model Coupon {
+  id              String   @id @default(cuid())
+  code            String   @unique
+  description     String?
+  discountType    String   @default("percentage") // percentage | fixed
+  discountValue   Float    @default(10)
+  maxUses         Int      @default(100)
+  usedCount       Int      @default(0)
+  minOrderValue   Float?
+  validFrom       DateTime?
+  validUntil      DateTime?
+  isActive        Boolean  @default(true)
+  packages        PackageCoupon[]
+  createdAt       DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model PackageCoupon {
+  packageId   String
+  couponId    String
+  package     TourPackage @relation(fields: [packageId], references: [id], onDelete: Cascade)
+  coupon      Coupon       @relation(fields: [couponId], references: [id], onDelete: Cascade)
+  @@id([packageId, couponId])
+}
+
+// ============================================================
+// BLOG / ARTICLES — SEO content
+// ============================================================
+model BlogPost {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  title           String
+  excerpt         String
+  content         String   // markdown
+  coverImage      String?
+  category        String   @default("Travel Guide")
+  tags            String   @default("[]") // JSON
+  author          String   @default("Asgari Tour & Travels")
+  readTime        Int      @default(5)
+  metaTitle       String?
+  metaDescription String?
+  status          String   @default("published")
+  publishedAt     DateTime @default(now())
+  createdAt       DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+// ============================================================
+// CRM LEADS / ENQUIRIES
+// ============================================================
+model Lead {
+  id              String   @id @default(cuid())
+  name            String
+  email           String?
+  phone           String?
+  destination     String?
+  packageId       String?
+  travelDate      String?
+  groupSize       Int?
+  budget          String?
+  message         String?
+  status          String   @default("new") // new | contacted | qualified | converted | lost
+  source          String   @default("website") // website | phone | whatsapp | referral
+  priority        String   @default("medium") // low | medium | high
+  notes           String   @default("[]") // JSON array of {at, text, author}
+  createdAt       DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+// ============================================================
+// TESTIMONIALS / REVIEWS
+// ============================================================
+model Testimonial {
+  id              String   @id @default(cuid())
+  name            String
+  location        String?
+  avatar          String?
+  rating          Int      @default(5)
+  title           String?
+  text            String
+  packageId       String?
+  package         TourPackage? @relation(fields: [packageId], references: [id], onDelete: SetNull)
+  featured        Boolean  @default(false)
+  approved        Boolean  @default(true)
+  source          String   @default("direct") // direct | google | tripadvisor
+  createdAt       DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+// ============================================================
+// GOOGLE RATINGS — synced reviews
+// ============================================================
+model GoogleReview {
+  id              String   @id @default(cuid())
+  placeId         String?
+  authorName      String
+  authorAvatar    String?
+  rating          Int      @default(5)
+  text            String
+  reviewDate      DateTime @default(now())
+  sourceUrl       String?
+  createdAt       DateTime @default(now())
+}
+
+// ============================================================
+// GALLERY
+// ============================================================
+model GalleryImage {
+  id              String   @id @default(cuid())
+  title           String?
+  description     String?
+  url             String
+  alt             String?
+  category        String   @default("destination") // destination | activity | culture | food | hotel
+  destinationId   String?
+  destination     Destination? @relation(fields: [destinationId], references: [id], onDelete: SetNull)
+  featured        Boolean  @default(false)
+  createdAt       DateTime @default(now())
+}
+
+// ============================================================
+// GENERIC EDITABLE SEO PAGES
+// ============================================================
+model SeoPage {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  title           String
+  content         String   // markdown / rich
+  heroImage       String?
+  sections        String   @default("[]") // JSON blocks
+  metaTitle       String?
+  metaDescription String?
+  metaKeywords    String?
+  status          String   @default("published")
+  createdAt       DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+// ============================================================
+// SITE SETTINGS (key-value) — hostinger, contact, social, etc.
+// ============================================================
+model SiteSetting {
+  id              String   @id @default(cuid())
+  key             String   @unique
+  value           String   // JSON-encoded value
+  category        String   @default("general") // general | contact | social | hostinger | google | integration
+  updatedAt      DateTime @updatedAt
+}
+
+// ============================================================
+// HOSTINGER INTEGRATION LOG
+// ============================================================
+model HostingerLog {
+  id              String   @id @default(cuid())
+  action          String   // sync | backup | deploy | api_call
+  status          String   @default("success") // success | error | pending
+  message         String?
+  response        String?
+  createdAt       DateTime @default(now())
+}
+
+// Keep User model for potential admin auth
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  role      String   @default("admin")
+  password  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
