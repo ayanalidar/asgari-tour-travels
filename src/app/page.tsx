@@ -15,12 +15,8 @@ import { PackageCard } from "@/components/site/PackageCard"
 import { BlogCard } from "@/components/site/BlogCard"
 import { TestimonialCard } from "@/components/site/TestimonialCard"
 import {
-  LazySeasonExplorer,
   LazyTestimonialCarousel,
-  LazySectionDivider,
 } from "@/components/site/LazySections"
-import { InstagramFeed } from "@/components/site/InstagramFeed"
-import { DepartureCalendar } from "@/components/site/DepartureCalendar"
 import { CTASection } from "@/components/site/CTASection"
 import { StatsCounter } from "@/components/site/StatsCounter"
 import { RatingBadge } from "@/components/site/RatingBadge"
@@ -48,28 +44,6 @@ import {
 import Link from "next/link"
 
 export const revalidate = 600
-
-// Sample departure dates for the departure calendar (next 3 months)
-function generateDepartures() {
-  const today = new Date()
-  const year = today.getFullYear()
-  const month = today.getMonth()
-  const mk = (y: number, m: number, d: number) =>
-    `${y}-${String(m + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`
-  return [
-    { id: "d1", date: mk(year, month, 12), packageTitle: "Kashmir Paradise Delight 5N/6D", packageSlug: "kashmir-paradise-delight-5n6d", region: "kashmir" as const, seatsTotal: 12, seatsFilled: 8, price: 24999, durationNights: 5 },
-    { id: "d2", date: mk(year, month, 18), packageTitle: "Ladakh Adventure Expedition 7N/8D", packageSlug: "ladakh-adventure-expedition-7n8d", region: "ladakh" as const, seatsTotal: 10, seatsFilled: 7, price: 34999, durationNights: 7 },
-    { id: "d3", date: mk(year, month, 22), packageTitle: "Kashmir Honeymoon Escape 4N/5D", packageSlug: "kashmir-honeymoon-escape-4n5d", region: "kashmir" as const, seatsTotal: 6, seatsFilled: 4, price: 21999, durationNights: 4 },
-    { id: "d4", date: mk(year, month + 1, 5), packageTitle: "Romantic Kashmir Honeymoon 5N/6D", packageSlug: "romantic-kashmir-honeymoon-5n6d", region: "kashmir" as const, seatsTotal: 8, seatsFilled: 3, price: 27999, durationNights: 5 },
-    { id: "d5", date: mk(year, month + 1, 9), packageTitle: "Ladakh Group Expedition 7N/8D", packageSlug: "ladakh-group-expedition-7n8d", region: "ladakh" as const, seatsTotal: 16, seatsFilled: 11, price: 31999, durationNights: 7 },
-    { id: "d6", date: mk(year, month + 1, 15), packageTitle: "Kashmir Family Holiday 6N/7D", packageSlug: "kashmir-family-holiday-6n7d-v2", region: "kashmir" as const, seatsTotal: 12, seatsFilled: 5, price: 29999, durationNights: 6 },
-    { id: "d7", date: mk(year, month + 1, 20), packageTitle: "Srinagar-Leh Highway 9N/10D", packageSlug: "srinagar-leh-highway-expedition-9n10d", region: "ladakh" as const, seatsTotal: 10, seatsFilled: 6, price: 48999, durationNights: 9 },
-    { id: "d8", date: mk(year, month + 1, 25), packageTitle: "Ladakh Honeymoon Heights 6N/7D", packageSlug: "ladakh-honeymoon-heights-of-romance-6n7d", region: "ladakh" as const, seatsTotal: 6, seatsFilled: 2, price: 38999, durationNights: 6 },
-    { id: "d9", date: mk(year, month + 2, 3), packageTitle: "Kashmir Winter Wonderland 4N/5D", packageSlug: "kashmir-winter-wonderland-4n5d", region: "kashmir" as const, seatsTotal: 10, seatsFilled: 4, price: 16999, durationNights: 4 },
-    { id: "d10", date: mk(year, month + 2, 14), packageTitle: "Ladakh Bike Trip 6N/7D", packageSlug: "ladakh-adventure-bike-trip-6n7d", region: "ladakh" as const, seatsTotal: 8, seatsFilled: 6, price: 38999, durationNights: 6 },
-  ]
-}
-const SAMPLE_DEPARTURES = generateDepartures()
 
 export default async function HomePage() {
   const [
@@ -164,23 +138,6 @@ export default async function HomePage() {
         </div>
       </Section>
 
-      {/* Season Explorer - interactive best-time-to-visit */}
-      <Section id="seasons" className="py-16 sm:py-24 relative overflow-hidden bg-gradient-to-b from-transparent via-accent/[0.03] to-transparent">
-        <div className="absolute inset-0 -z-10 grid-overlay opacity-20 pointer-events-none" />
-        <SectionHeading
-          eyebrow="Best Time to Visit"
-          title={
-            <>
-              Every season, a new <span className="gradient-text-mix">paradise</span>
-            </>
-          }
-          subtitle="Kashmir & Ladakh transform through the year. Tap a season to discover the destinations at their peak."
-        />
-        <LazySeasonExplorer destinations={allDestinations} />
-      </Section>
-
-      <LazySectionDivider variant="wave" />
-
       {/* Plan-Your-Trip teaser */}
       <Section className="py-16 sm:py-24">
         <div className="relative overflow-hidden rounded-3xl glass-strong p-8 sm:p-12">
@@ -260,8 +217,6 @@ export default async function HomePage() {
       {/* Why choose us */}
       <WhyChooseSection />
 
-      <LazySectionDivider variant="dots" />
-
       {/* Featured packages full grid */}
       <Section id="featured-packages" className="py-16 sm:py-24">
         <SectionHeading
@@ -282,8 +237,6 @@ export default async function HomePage() {
 
       {/* Experience strip */}
       <ExperienceStrip />
-
-      <LazySectionDivider variant="spikes" />
 
       {/* Testimonials */}
       <Section id="testimonials" className="py-16 sm:py-24 bg-gradient-to-b from-transparent via-accent/[0.04] to-transparent">
@@ -330,28 +283,30 @@ export default async function HomePage() {
         </div>
       </Section>
 
-      {/* Instagram feed */}
-      <Section className="py-16 sm:py-24">
-        <InstagramFeed handle="@asgaritourandtravel" />
-      </Section>
-
-      {/* Departure calendar */}
-      <Section className="pb-16 sm:pb-24">
+      {/* Blog teaser */}
+      <Section id="blog" className="py-16 sm:py-24">
         <SectionHeading
-          eyebrow="Group Departures"
+          eyebrow="Travel Journal"
           title={
             <>
-              Upcoming <span className="gradient-text-mix">departure dates</span>
+              Stories, tips & <span className="gradient-text-saffron">inspiration</span>
             </>
           }
-          subtitle="Join a group departure and save. Fixed dates, guaranteed departures, small groups."
+          subtitle="Expert travel guides, itineraries and stories from the heart of the Himalayas."
         />
-        <div className="mt-8">
-          <DepartureCalendar departures={SAMPLE_DEPARTURES} />
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {blogTeaser.map((p, i) => (
+            <BlogCard key={p.id} post={p} index={i} />
+          ))}
+        </div>
+        <div className="mt-8 flex justify-center">
+          <Button asChild size="lg" variant="outline">
+            <Link href="/blog">
+              Read the journal <ArrowRight className="size-4" />
+            </Link>
+          </Button>
         </div>
       </Section>
-
-      <LazySectionDivider variant="gradient" />
 
       {/* CTA */}
       <Section className="py-16 sm:py-24">

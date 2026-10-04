@@ -42,6 +42,22 @@ const SectionDividerLazy = dynamic(
   }
 )
 
+const InstagramFeedLazy = dynamic(
+  () => import("./InstagramFeed").then((m) => m.InstagramFeed),
+  {
+    loading: () => <div className="h-80 animate-pulse rounded-3xl bg-muted/30" />,
+    ssr: false,
+  }
+)
+
+const DepartureCalendarLazy = dynamic(
+  () => import("./DepartureCalendar").then((m) => m.DepartureCalendar),
+  {
+    loading: () => <div className="h-96 animate-pulse rounded-3xl bg-muted/30" />,
+    ssr: false,
+  }
+)
+
 export function LazySeasonExplorer({ destinations }: { destinations: DestinationT[] }) {
   return (
     <Suspense>
@@ -65,6 +81,22 @@ export function LazySectionDivider({ variant = "gradient", className = "" }: {
   return (
     <Suspense>
       <SectionDividerLazy variant={variant} className={className} />
+    </Suspense>
+  )
+}
+
+export function LazyInstagramFeed({ handle }: { handle: string }) {
+  return (
+    <Suspense>
+      <InstagramFeedLazy handle={handle} />
+    </Suspense>
+  )
+}
+
+export function LazyDepartureCalendar({ departures }: { departures: any[] }) {
+  return (
+    <Suspense>
+      <DepartureCalendarLazy departures={departures} />
     </Suspense>
   )
 }
