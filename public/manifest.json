@@ -1,0 +1,48 @@
+{
+  "name": "Asgari Tour & Travels",
+  "short_name": "Asgari Tours",
+  "description": "Kashmir & Ladakh luxury tour packages - houseboats, Gulmarg gondola, Pangong Lake, Nubra Valley & more.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0f",
+  "theme_color": "#c8860b",
+  "orientation": "portrait-primary",
+  "categories": ["travel", "tourism", "lifestyle"],
+  "icons": [
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/uploads/asgari-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Tour Packages",
+      "url": "/packages",
+      "description": "Browse all tour packages"
+    },
+    {
+      "name": "Destinations",
+      "url": "/destinations",
+      "description": "Explore destinations"
+    },
+    {
+      "name": "Plan Your Trip",
+      "url": "/plan-your-trip",
+      "description": "Build a custom itinerary"
+    }
+  ]
+}

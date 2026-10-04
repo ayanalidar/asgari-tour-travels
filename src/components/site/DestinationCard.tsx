@@ -102,37 +102,35 @@ export function DestinationCard({
             </span>
           </div>
 
-          {/* Hover overlay quick facts */}
-          <div className="absolute inset-0 flex items-end opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-            <div className="w-full bg-gradient-to-t from-black/90 to-transparent p-4 pt-12">
-              <div className="flex flex-wrap items-center gap-3 text-[11px] text-white/90">
-                {season && (
-                  <span className="flex items-center gap-1 rounded-md bg-white/10 px-2 py-1">
-                    <Calendar className="size-3 text-primary" /> {season.emoji} {season.label}
-                  </span>
-                )}
-                {destination.altitude && (
-                  <span className="flex items-center gap-1 rounded-md bg-white/10 px-2 py-1">
-                    <Mountain className="size-3 text-accent" /> {destination.altitude}
-                  </span>
-                )}
-                {destination.distance && (
-                  <span className="flex items-center gap-1 rounded-md bg-white/10 px-2 py-1">
-                    <MapPin className="size-3 text-rose-300" />
-                    {destination.distance.replace(/^From\s.*/, "").trim() || destination.distance}
-                  </span>
-                )}
-              </div>
+          {/* Hover overlay quick facts - appears at top, doesn't overlap title */}
+          <div className="absolute inset-x-3 top-12 opacity-0 transition-all duration-300 group-hover:opacity-100">
+            <div className="flex flex-wrap gap-1.5">
+              {season && (
+                <span className="flex items-center gap-1 rounded-md bg-black/60 px-2 py-1 text-[10px] text-white/90 backdrop-blur-md">
+                  <Calendar className="size-2.5 text-primary" /> {season.emoji} {season.label}
+                </span>
+              )}
+              {destination.altitude && (
+                <span className="flex items-center gap-1 rounded-md bg-black/60 px-2 py-1 text-[10px] text-white/90 backdrop-blur-md">
+                  <Mountain className="size-2.5 text-accent" /> {destination.altitude}
+                </span>
+              )}
+              {destination.distance && (
+                <span className="flex items-center gap-1 rounded-md bg-black/60 px-2 py-1 text-[10px] text-white/90 backdrop-blur-md">
+                  <MapPin className="size-2.5 text-rose-300" />
+                  {destination.distance.replace(/^From\s.*/, "").trim() || destination.distance}
+                </span>
+              )}
             </div>
           </div>
 
-          {/* Title overlay (always visible) */}
-          <div className="absolute inset-x-0 bottom-0 p-4 transition-transform duration-300 group-hover:translate-y-1">
+          {/* Title overlay (always visible at bottom) */}
+          <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
             <h3 className="font-display text-xl font-bold leading-tight text-white drop-shadow-lg">
               {destination.name}
             </h3>
             {!compact && destination.tagline && (
-              <p className="mt-1 line-clamp-2 text-xs text-white/75">
+              <p className="mt-1 line-clamp-1 text-xs text-white/75">
                 {destination.tagline}
               </p>
             )}
