@@ -127,11 +127,18 @@
   }
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+  }
+  /* Prevent decorative elements from causing scroll */
+  .aurora-animated, .aurora-bg {
+    pointer-events: none;
   }
 }
 
@@ -237,13 +244,14 @@
   50% { background-position: 100% 50%; }
 }
 
-/* Floating animation */
+/* Floating animation - subtle, no layout shift */
 .float-slow {
-  animation: float 6s ease-in-out infinite;
+  animation: float 8s ease-in-out infinite;
+  will-change: transform;
 }
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
+  0%, 100% { transform: translateY(0px) translateZ(0); }
+  50% { transform: translateY(-6px) translateZ(0); }
 }
 
 /* Shimmer */

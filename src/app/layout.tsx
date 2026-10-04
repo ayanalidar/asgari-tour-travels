@@ -66,14 +66,36 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning className="dark">
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#c8860b" />
+        <link rel="apple-touch-icon" href="/icons/icon-512.png" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="Asgari Tours" />
+        <meta name="mobile-web-app-capable" content="yes" />
+      </head>
       <body
-        className={`${sans.variable} ${display.variable} ${mono.variable} antialiased bg-background text-foreground min-h-screen flex flex-col`}
+        className={`${sans.variable} ${display.variable} ${mono.variable} antialiased bg-background text-foreground min-h-screen flex flex-col overflow-x-hidden`}
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           {children}
         </ThemeProvider>
         <Toaster />
         <SonnerToaster />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                  navigator.serviceWorker.register('/sw.js').catch(function(e) {
+                    console.log('SW registration failed:', e);
+                  });
+                });
+              }
+            `,
+          }}
+        />
       </body>
     </html>
   );
