@@ -6,6 +6,7 @@ import { getAllDestinations } from "@/lib/queries"
 import { PublicLayout } from "@/components/site/PublicLayout"
 import { PageHeader } from "@/components/site/PageHeader"
 import { DestinationsExplorer } from "@/components/site/DestinationsExplorer"
+import { DestinationMap } from "@/components/site/DestinationMap"
 import { Breadcrumbs } from "@/components/site/Breadcrumbs"
 import { Button } from "@/components/ui/button"
 
@@ -56,6 +57,11 @@ export default async function DestinationsPage({
           initialCategory={initialCategory}
           initialQuery={initialQuery}
         />
+
+        {/* Interactive Map */}
+        <div className="mt-12">
+          <DestinationMap destinations={destinations} />
+        </div>
 
         {/* Compare CTA */}
         <div className="mt-12 relative overflow-hidden rounded-2xl glass-strong p-6 sm:p-8">

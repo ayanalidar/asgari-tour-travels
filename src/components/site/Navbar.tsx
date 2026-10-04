@@ -37,9 +37,9 @@ const NAV_LINKS: NavLink[] = [
   { href: "/", label: "Home" },
   { href: "/destinations", label: "Destinations" },
   { href: "/packages", label: "Packages" },
+  { href: "/guide", label: "Guide" },
   { href: "/compare", label: "Compare" },
   { href: "/plan-your-trip", label: "Plan Trip" },
-  { href: "/ladakh", label: "Ladakh" },
   { href: "/blog", label: "Blog" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
@@ -90,9 +90,13 @@ export function Navbar({ settings }: { settings?: Record<string, any> }) {
             className="group flex items-center gap-2.5 shrink-0"
             aria-label="Asgari Tour & Travels home"
           >
-            <span className="relative grid size-10 place-items-center rounded-xl bg-gradient-to-br from-primary/90 to-amber-600/80 shadow-[0_0_24px_var(--saffron-glow)] transition-transform group-hover:scale-105">
-              <Mountain className="size-5 text-primary-foreground" strokeWidth={2.5} />
-              <span className="absolute -right-0.5 -top-0.5 size-2.5 rounded-full bg-accent shadow-[0_0_10px_var(--emerald-glow)]" />
+            <span className="relative grid size-10 place-items-center rounded-xl bg-gradient-to-br from-primary/90 to-amber-600/80 shadow-[0_0_24px_var(--saffron-glow)] overflow-hidden transition-transform group-hover:scale-105">
+              <img
+                src="/uploads/asgari-logo.png"
+                alt="Asgari Tour & Travels"
+                className="h-full w-full object-cover rounded-xl"
+                onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+              />
             </span>
             <span className="flex flex-col leading-none">
               <span className="font-display text-base font-extrabold tracking-tight text-foreground sm:text-lg">
@@ -210,8 +214,13 @@ export function Navbar({ settings }: { settings?: Record<string, any> }) {
                   className="mb-4 flex items-center gap-2"
                   aria-label="Asgari Tour & Travels"
                 >
-                  <span className="grid size-9 place-items-center rounded-xl bg-gradient-to-br from-primary/90 to-amber-600/80">
-                    <Mountain className="size-4 text-primary-foreground" strokeWidth={2.5} />
+                  <span className="grid size-9 place-items-center rounded-xl bg-gradient-to-br from-primary/90 to-amber-600/80 overflow-hidden">
+                    <img
+                      src="/uploads/asgari-logo.png"
+                      alt="Asgari Tour & Travels"
+                      className="h-full w-full object-cover rounded-xl"
+                      onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                    />
                   </span>
                   <span className="font-display font-extrabold">Asgari</span>
                 </Link>

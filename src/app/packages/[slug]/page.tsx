@@ -26,6 +26,7 @@ import { EnquiryForm } from "@/components/site/EnquiryForm"
 import { CTASection } from "@/components/site/CTASection"
 import { TestimonialCard } from "@/components/site/TestimonialCard"
 import { BookingButton } from "@/components/site/BookingButton"
+import { PaymentButton } from "@/components/site/PaymentButton"
 import { QuickQuoteWidget } from "@/components/site/QuickQuoteWidget"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -217,6 +218,21 @@ export default async function PackageDetailPage({ params }: Props) {
                   currency: p.currency,
                 }}
                 size="lg"
+                fullWidth
+              />
+              <PaymentButton
+                pkg={{
+                  id: p.id,
+                  title: p.title,
+                  slug: p.slug,
+                  price: p.price,
+                  discountPrice: p.discountPrice,
+                  currency: p.currency,
+                }}
+                amount={p.discountPrice ?? p.price}
+                label="Pay 25% Advance"
+                variant="outline"
+                size="sm"
                 fullWidth
               />
               <span className="text-xs text-center text-muted-foreground">

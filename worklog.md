@@ -633,3 +633,51 @@ Suggestions for More Features (for future rounds):
 Unresolved / Next Steps:
 - agent-browser full-page verification: persistently blocked by 4GB RAM
 - The recurring 15-min cron job (job_id: 434245) will continue picking up feature suggestions above
+
+---
+Task ID: 15 (user request batch 2)
+Agent: main (orchestrator)
+Task: Logo, SEO guide pages, honeymoon/family packages, interactive map, payment integration, Instagram feed, departure calendar
+
+Current Project Status:
+- Project stable from Tasks 1-14 (36 destinations, 12 packages, 10 blog posts, 14 testimonials, 15 activities, full CMS, weather widget, real contact data, no em dashes)
+- Lint 100% clean (0 errors, 0 warnings)
+
+Work Log:
+1. **Logo** - External URL was unreachable (timeout). Generated a professional travel logo using Image Generation skill (saffron/emerald mountain + sun design, 117KB PNG). Integrated into Navbar (desktop + mobile Sheet) with onError fallback. Logo serves at /uploads/asgari-logo.png. Added "Guide" to nav links (replaced "Ladakh" which is accessible via /destinations?region=ladakh).
+
+2. **SEO Guide Pages** (src/app/guide/page.tsx) - new comprehensive /guide page with:
+   - Seasonal guides: all 4 seasons (Spring/Summer/Autumn/Winter) with months, descriptions, highlights, best-for destinations
+   - Famous Kashmir goods: 10 world-famous products with emoji, category, fame, description, best-buy location, price range, and shopping tips (Saffron, Pashmina, Carpets, Paper-Mache, Walnut Wood, Willow Bats, Honey, Kahwa/Noon Chai, Dry Fruits, Kangri fire pot)
+   - Travel tips: 6 expert tips (best time, altitude, permits, bargaining, food, photography)
+   - Destinations index: all 36 destinations grouped by Kashmir/Ladakh with links
+   - Full SEO metadata. Verified: 200, 665KB, all content confirmed.
+
+3. **Honeymoon Packages** (2 new) - "Romantic Kashmir Honeymoon 5N/6D" (houseboat, candle-lit dinner, couple photoshoot, ₹27,999) and "Ladakh Honeymoon Heights of Romance 6N/7D" (Pangong sunset, private camps, stargazing, ₹38,999). Both featured + popular.
+
+4. **Family & Group Packages** (2 new) - "Kashmir Family Holiday 6N/7D" (houseboat, pony rides, Yusmarg picnic, kid-friendly, ₹29,999) and "Ladakh Group Expedition 7N/8D" (Hanle astrophotography, group coordinator, 4-16 pax, ₹31,999). Total packages now 16 (was 12).
+
+5. **Interactive Destination Map** (src/components/site/DestinationMap.tsx) - SVG-based map with lat/lng projection. Features: region filter (All/Kashmir/Ladakh), animated pulse rings for featured destinations, color-coded pins (saffron=Kashmir, emerald=Ladakh), connecting route lines, click-to-select destination popup with image + details + explore link, legend. Added to /destinations page. No external map library needed (lightweight SVG).
+
+6. **Payment Integration** (src/app/api/public/payment/route.ts + src/components/site/PaymentButton.tsx) - simulated Razorpay-style payment flow:
+   - API: validates input, creates payment session with paymentId, UPI ID (asgaritourandtravel@okhdfcbank), QR code URL, 10-min expiry
+   - PaymentButton: multi-step modal (form → methods → processing → success). Methods: UPI/QR (with copy-to-clipboard), Credit/Debit Card, Net Banking. 25% advance payment. Success state with booking confirmation. Trust footer (256-bit encrypted, PCI DSS, Razorpay). Added to package pages as "Pay 25% Advance" button next to BookingButton.
+
+7. **Instagram Feed** (src/components/site/InstagramFeed.tsx) - 8-post grid with hover overlays showing caption + likes/comments. Uses destination images as fallback posts. Links to @asgaritourandtravel. Gradient Instagram icon header + follow button. Added to landing page.
+
+8. **Departure Calendar** (src/components/site/DepartureCalendar.tsx) - full month calendar with departure indicators. Features: month navigation, clickable dates, 10 sample departures (next 3 months across various packages), seat availability bar (green/amber/red based on fill), seats-left urgency, region color dots, "Join departure" buttons. Added to landing page with SectionHeading.
+
+Verification Results:
+- `bun run lint` → 0 errors, 0 warnings
+- `/guide` → 200 (665KB, "Travel Guide" + "Saffron" + "Pashmina" + all 4 seasons confirmed)
+- `/api/public/packages` → 16 packages (4 new confirmed)
+- `/api/public/payment` → returns paymentId + UPI ID (asgaritourandtravel@okhdfcbank)
+- `/uploads/asgari-logo.png` → 200 (logo serves)
+- All 9 nav routes work (Home, Destinations, Packages, Guide, Compare, Plan Trip, Blog, About, Contact)
+
+Unresolved / Next Steps:
+- External logo URL was unreachable; used AI-generated logo instead. Can be replaced with real logo file if provided/uploaded via admin.
+- Payment integration is simulated (no real Razorpay key). To go live: add Razorpay key in env, replace mock session creation with real razorpay.orders.create(), add webhook handler for payment verification.
+- Instagram feed uses fallback images; can be wired to real Instagram Graph API with access token.
+- Departure calendar uses sample data; can be wired to a Departures DB table (would need schema addition).
+- The recurring 15-min cron job (job_id: 434245) will continue maintenance.
