@@ -14,6 +14,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { DestinationCard } from "./DestinationCard"
+import { deriveBestForTags, type TagType } from "./BestForTags"
 import type { DestinationT } from "@/lib/types"
 
 interface Props {
@@ -22,6 +23,17 @@ interface Props {
   initialCategory?: string
   initialQuery?: string
 }
+
+const BEST_FOR_OPTIONS: { id: TagType; label: string; emoji: string }[] = [
+  { id: "honeymoon", label: "Honeymoon", emoji: "❤️" },
+  { id: "adventure", label: "Adventure", emoji: "🏔️" },
+  { id: "family", label: "Family", emoji: "👨‍👩‍👧" },
+  { id: "photography", label: "Photography", emoji: "📷" },
+  { id: "skiing", label: "Skiing", emoji: "⛷️" },
+  { id: "nature", label: "Nature", emoji: "🌿" },
+  { id: "spiritual", label: "Spiritual", emoji: "✨" },
+  { id: "cultural", label: "Cultural", emoji: "🧭" },
+]
 
 export function DestinationsExplorer({
   destinations,
@@ -32,6 +44,7 @@ export function DestinationsExplorer({
   const [region, setRegion] = useState(initialRegion)
   const [category, setCategory] = useState(initialCategory)
   const [query, setQuery] = useState(initialQuery)
+  const [bestFor, setBestFor] = useState<TagType | "all">("all")
 
   const categories = useMemo(() => {
     const set = new Set<string>()
@@ -39,10 +52,33 @@ export function DestinationsExplorer({
     return Array.from(set).sort()
   }, [destinations])
 
+  // Pre-compute best-for tags for each destination
+  const destTags = useMemo(() => {
+    const map = new Map<string, TagType[]>()
+    destinations.forEach((d) => {
+      map.set(
+        d.id,
+        deriveBestForTags({
+          slug: d.slug,
+          name: d.name,
+          category: d.category,
+          region: d.region,
+          altitude: d.altitude,
+          bestTimeToVisit: d.bestTimeToVisit,
+        })
+      )
+    })
+    return map
+  }, [destinations])
+
   const filtered = useMemo(() => {
     return destinations.filter((d) => {
       if (region !== "all" && d.region !== region) return false
       if (category !== "all" && d.category !== category) return false
+      if (bestFor !== "all") {
+        const tags = destTags.get(d.id) || []
+        if (!tags.includes(bestFor)) return false
+      }
       if (query.trim()) {
         const q = query.trim().toLowerCase()
         const hay = `${d.name} ${d.tagline ?? ""} ${d.shortDescription} ${d.category} ${d.region}`.toLowerCase()
@@ -50,7 +86,7 @@ export function DestinationsExplorer({
       }
       return true
     })
-  }, [destinations, region, category, query])
+  }, [destinations, region, category, query, bestFor, destTags])
 
   return (
     <div className="flex flex-col gap-6">
@@ -112,6 +148,39 @@ export function DestinationsExplorer({
                 ))}
               </SelectContent>
             </Select>
+          </div>
+
+          {/* Best-for filter chips */}
+          <div>
+            <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-muted-foreground">
+              Best For
+            </label>
+            <div className="flex flex-wrap gap-2">
+              <button
+                onClick={() => setBestFor("all")}
+                className={`rounded-full border px-3 py-1 text-xs font-medium transition-all ${
+                  bestFor === "all"
+                    ? "border-primary/40 bg-primary/10 text-primary"
+                    : "border-border/60 bg-background/40 text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                All
+              </button>
+              {BEST_FOR_OPTIONS.map((opt) => (
+                <button
+                  key={opt.id}
+                  onClick={() => setBestFor(opt.id)}
+                  className={`rounded-full border px-3 py-1 text-xs font-medium transition-all ${
+                    bestFor === opt.id
+                      ? "border-primary/40 bg-primary/10 text-primary"
+                      : "border-border/60 bg-background/40 text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  <span className="mr-1">{opt.emoji}</span>
+                  {opt.label}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </div>
