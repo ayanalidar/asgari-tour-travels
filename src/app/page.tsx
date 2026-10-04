@@ -14,13 +14,15 @@ import { DestinationCard } from "@/components/site/DestinationCard"
 import { PackageCard } from "@/components/site/PackageCard"
 import { BlogCard } from "@/components/site/BlogCard"
 import { TestimonialCard } from "@/components/site/TestimonialCard"
-import { TestimonialCarousel } from "@/components/site/TestimonialCarousel"
+import {
+  LazySeasonExplorer,
+  LazyTestimonialCarousel,
+  LazySectionDivider,
+} from "@/components/site/LazySections"
 import { CTASection } from "@/components/site/CTASection"
 import { StatsCounter } from "@/components/site/StatsCounter"
 import { RatingBadge } from "@/components/site/RatingBadge"
 import { RatingBadgesRow } from "@/components/site/RatingBadgesRow"
-import { SeasonExplorer } from "@/components/site/SeasonExplorer"
-import { SectionDivider } from "@/components/site/SectionDivider"
 import { Button } from "@/components/ui/button"
 import {
   ShieldCheck,
@@ -150,10 +152,10 @@ export default async function HomePage() {
           }
           subtitle="Kashmir & Ladakh transform through the year. Tap a season to discover the destinations at their peak."
         />
-        <SeasonExplorer destinations={allDestinations} />
+        <LazySeasonExplorer destinations={allDestinations} />
       </Section>
 
-      <SectionDivider variant="wave" />
+      <LazySectionDivider variant="wave" />
 
       {/* Plan-Your-Trip teaser */}
       <Section className="py-16 sm:py-24">
@@ -234,7 +236,7 @@ export default async function HomePage() {
       {/* Why choose us */}
       <WhyChooseSection />
 
-      <SectionDivider variant="dots" />
+      <LazySectionDivider variant="dots" />
 
       {/* Featured packages full grid */}
       <Section id="featured-packages" className="py-16 sm:py-24">
@@ -257,7 +259,7 @@ export default async function HomePage() {
       {/* Experience strip */}
       <ExperienceStrip />
 
-      <SectionDivider variant="spikes" />
+      <LazySectionDivider variant="spikes" />
 
       {/* Testimonials */}
       <Section id="testimonials" className="py-16 sm:py-24 bg-gradient-to-b from-transparent via-accent/[0.04] to-transparent">
@@ -275,7 +277,7 @@ export default async function HomePage() {
         </div>
         {/* Featured testimonial carousel */}
         <div className="mt-10 max-w-3xl mx-auto">
-          <TestimonialCarousel testimonials={testimonials} />
+          <LazyTestimonialCarousel testimonials={testimonials} />
         </div>
       </Section>
 
@@ -304,7 +306,7 @@ export default async function HomePage() {
         </div>
       </Section>
 
-      <SectionDivider variant="gradient" />
+      <LazySectionDivider variant="gradient" />
 
       {/* CTA */}
       <Section className="py-16 sm:py-24">

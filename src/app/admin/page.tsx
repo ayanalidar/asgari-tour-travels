@@ -50,6 +50,7 @@ interface Stats {
   googleReviewCount: number;
   recentLeads: any[];
   convertedLeads: any[];
+  recentTestimonials: any[];
   leadsBySource: { source: string; count: number }[];
   leadsByStatus: { status: string; count: number }[];
   leadsByDay: { date: string; label: string; count: number }[];
@@ -102,7 +103,7 @@ export default function AdminDashboardPage() {
     );
   }
 
-  const { counts, recentLeads, convertedLeads, leadsBySource, leadsByDay, popularPackages } = stats;
+  const { counts, recentLeads, convertedLeads, recentTestimonials, leadsBySource, leadsByDay, popularPackages } = stats;
 
   return (
     <div className="space-y-6">
@@ -389,6 +390,59 @@ export default function AdminDashboardPage() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Recent testimonials */}
+      {recentTestimonials && recentTestimonials.length > 0 && (
+        <Card className="glass border-white/10">
+          <CardHeader>
+            <CardTitle className="text-base font-semibold">Recent Testimonials</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {recentTestimonials.map((t) => (
+                <div
+                  key={t.id}
+                  className="rounded-lg border border-white/10 bg-white/5 p-3"
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-1">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <Star
+                          key={i}
+                          className={`size-3 ${i < t.rating ? "fill-amber-400 text-amber-400" : "text-muted-foreground"}`}
+                        />
+                      ))}
+                    </div>
+                    <div className="flex items-center gap-1">
+                      {t.featured && (
+                        <Badge variant="outline" className="h-4 px-1 text-[9px] border-primary/40 text-primary">Featured</Badge>
+                      )}
+                      {!t.approved && (
+                        <Badge variant="outline" className="h-4 px-1 text-[9px] border-amber-400/40 text-amber-300">Pending</Badge>
+                      )}
+                    </div>
+                  </div>
+                  <p className="text-xs text-muted-foreground line-clamp-3 mb-2">
+                    &ldquo;{t.text}&rdquo;
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-xs font-semibold">{t.name}</p>
+                      <p className="text-[10px] text-muted-foreground">{t.location || t.source}</p>
+                    </div>
+                    <Link
+                      href="/admin/testimonials"
+                      className="text-[10px] text-primary hover:underline"
+                    >
+                      Manage
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Quick actions */}
       <Card className="glass border-white/10">

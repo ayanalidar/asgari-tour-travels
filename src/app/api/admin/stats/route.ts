@@ -106,6 +106,24 @@ export async function GET(req: NextRequest) {
       revenue = pkgs.reduce((s, p) => s + p.price * Math.max(1, p.reviewCount) * 0.1, 0);
     }
 
+    // Recent testimonials (latest 4)
+    const recentTestimonials = await db.testimonial.findMany({
+      orderBy: { createdAt: "desc" },
+      take: 4,
+      select: {
+        id: true,
+        name: true,
+        location: true,
+        rating: true,
+        title: true,
+        text: true,
+        featured: true,
+        approved: true,
+        source: true,
+        createdAt: true,
+      },
+    });
+
     const settings = await getSettings();
     const googleRating = settings?.google_rating ?? 4.8;
     const googleReviewCount = settings?.google_review_count ?? 1247;
@@ -125,6 +143,7 @@ export async function GET(req: NextRequest) {
       googleReviewCount,
       recentLeads,
       convertedLeads,
+      recentTestimonials,
       leadsBySource,
       leadsByStatus,
       leadsByDay: days,

@@ -447,3 +447,39 @@ Unresolved / Next Steps:
 - Landing page cumulative compilation: still very heavy; consider lazy-loading client components with `next/dynamic` in a future round
 - Future feature ideas: interactive destination map with pins, weather/season widget, multi-language, user accounts + saved trips/wishlist, payment integration, package comparison tool, activity booking calendar
 - The recurring 15-min cron job (job_id: 434245) will continue picking up these in subsequent rounds
+
+---
+Task ID: 11 (cron review round 7)
+Agent: web-dev reviewer (cron)
+Task: QA verification, lazy-load landing page components, destination stats bar, admin recent testimonials widget, enhanced CTA
+
+Current Project Status:
+- Project stable from Tasks 1-10 (36 destinations, 10 packages, 10 blog posts, 14 testimonials, 15 activities with detail pages, full CMS, many features)
+- Dev server confirmed compiling & serving key routes (200 responses via curl)
+- Memory constraint persists: 4GB sandbox OOM-kills next-server during cumulative route compilation. The landing page was identified as the heaviest page due to many client components bundled together.
+- Lint remained 100% clean throughout (0 errors, 0 warnings)
+
+Work Log:
+- **QA**: Verified server starts, routes return 200. Identified the landing page OOM issue noted in previous rounds and decided to address it with lazy-loading.
+
+NEW FEATURES & IMPROVEMENTS BUILT:
+1. **Lazy-Loaded Landing Page Components** (src/components/site/LazySections.tsx) — created a client wrapper that uses `next/dynamic` to lazy-load the heaviest interactive components (SeasonExplorer, TestimonialCarousel, SectionDivider) with skeleton loading fallbacks. Updated the landing page to use `LazySeasonExplorer`, `LazyTestimonialCarousel`, and `LazySectionDivider` instead of direct imports. This splits the client bundle into separate chunks, reducing initial compile memory. Loading fallbacks: SeasonExplorer shows 6 pulse skeleton cards, TestimonialCarousel shows a pulse block, SectionDivider shows an empty spacer. Verified: landing page renders 200 (792KB) with "LazySection" + "aurora-animated" + "gradient-text" confirmed.
+
+2. **DestinationStatsBar** (src/components/site/DestinationStatsBar.tsx + added to destination pages) — new 6-column stats banner component added below the destination hero, showing: Best Time, Duration, Altitude, Distance, Things-to-Do count, Region/Category. Each stat is a glass card with an icon, label, value, and a hover glow effect. Framer Motion staggered entrance animations. Added to the destination detail page between the hero and body sections. Verified: "Altitude" + "Best Time" + "Things to Do" confirmed on /destinations/srinagar.
+
+3. **Admin Dashboard Recent Testimonials Widget** (enhanced src/app/api/admin/stats/route.ts + src/app/admin/page.tsx) — added `recentTestimonials` (latest 4) to the stats API response, then built a dashboard widget displaying them in a 4-column grid. Each card shows: star rating (5 stars with fill), Featured/Pending badges, truncated quote (line-clamp-3), author name, location/source, and a "Manage" link. Added to the dashboard between Popular Packages and Quick Actions. Verified: stats API returns 4 recentTestimonials (Lena Schmidt, Dr. Sanjay Agarwal, Nikhil & Aishwarya with ratings); dashboard page renders "Recent Testimonials" section.
+
+4. **Enhanced CTASection** (rewrote src/components/site/CTASection.tsx) — upgraded the call-to-action component with: animated floating orbs (Framer Motion y/opacity loops), decorative "Limited Season Slots — Book Early" urgency badge with pulsing Sparkles icon, trust indicators row (24-hour turnaround, No upfront payment, 100% customisable), enhanced contact row with phone + WhatsApp links (circular icon badges). Animated orbs use saffron + emerald glows. The urgency badge and trust indicators appear on all pages that use CTASection (landing, destination, package, blog, activity pages).
+
+Verification Results:
+- `bun run lint` → 0 errors, 0 warnings ✓
+- `/` landing page → 200 (792KB, "LazySection" + "aurora-animated" + "gradient-text" confirmed) ✓
+- `/api/admin/stats` → recentTestimonials: 4 (Lena Schmidt ★5, Dr. Sanjay Agarwal ★4, Nikhil & Aishwarya ★5) ✓
+- `/admin` dashboard → "Recent Testimonials" + "Quick Actions" + "Live Dashboard" + "Popular Packages" confirmed ✓
+- `/destinations/srinagar` → "Altitude" + "Best Time" + "Things to Do" (DestinationStatsBar) confirmed ✓
+
+Unresolved / Next Steps:
+- agent-browser full-page verification: persistently blocked by 4GB RAM (server OOM-killed when Chrome loads; each page verified via curl instead)
+- Landing page is now lighter with lazy-loading but still heavy; further optimization could include code-splitting more components
+- Future feature ideas: interactive destination map with pins, weather/season widget, multi-language, user accounts + saved trips/wishlist, payment integration, package comparison tool, activity booking calendar, destination "best for" tags (honeymoon/adventure/family)
+- The recurring 15-min cron job (job_id: 434245) will continue picking up these in subsequent rounds

@@ -26,6 +26,7 @@ import { PackageCard } from "@/components/site/PackageCard"
 import { CTASection } from "@/components/site/CTASection"
 import { EnquiryForm } from "@/components/site/EnquiryForm"
 import { GalleryLightbox } from "@/components/site/GalleryLightbox"
+import { DestinationStatsBar } from "@/components/site/DestinationStatsBar"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 
@@ -187,6 +188,19 @@ export default async function DestinationDetailPage({ params }: Props) {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Stats bar */}
+      <section className="container mx-auto max-w-7xl px-4 sm:px-6 pb-8">
+        <DestinationStatsBar
+          bestTimeToVisit={d.bestTimeToVisit}
+          duration={d.duration}
+          altitude={d.altitude}
+          distance={d.distance}
+          thingsToDoCount={thingsToDo.length}
+          region={d.region}
+          category={d.category}
+        />
       </section>
 
       {/* Body */}
