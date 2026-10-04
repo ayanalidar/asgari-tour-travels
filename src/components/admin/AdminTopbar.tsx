@@ -80,7 +80,7 @@ export function AdminTopbar({ onMenu }: { onMenu: () => void }) {
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               const val = (e.target as HTMLInputElement).value;
-              if (val.trim()) toast.info(`Search is coming soon — query: "${val}"`);
+              if (val.trim()) toast.info(`Search is coming soon - query: "${val}"`);
             }
           }}
         />

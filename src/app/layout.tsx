@@ -27,7 +27,7 @@ const mono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://asgaritravels.com"),
   title: {
-    default: "Asgari Tour & Travels — Kashmir & Ladakh Luxury Tours",
+    default: "Asgari Tour & Travels - Kashmir & Ladakh Luxury Tours",
     template: "%s | Asgari Tour & Travels",
   },
   description:
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Asgari Tour & Travels" }],
   creator: "Asgari Tour & Travels",
   openGraph: {
-    title: "Asgari Tour & Travels — Kashmir & Ladakh Luxury Tours",
+    title: "Asgari Tour & Travels - Kashmir & Ladakh Luxury Tours",
     description: "Curated luxury tour packages across Kashmir & Ladakh. Srinagar, Gulmarg, Pahalgam, Leh, Pangong & more.",
     url: "https://asgaritravels.com",
     siteName: "Asgari Tour & Travels",
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Asgari Tour & Travels — Kashmir & Ladakh Luxury Tours",
+    title: "Asgari Tour & Travels - Kashmir & Ladakh Luxury Tours",
     description: "Curated luxury tour packages across Kashmir & Ladakh.",
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true } },

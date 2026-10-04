@@ -39,7 +39,7 @@ const SEASONS: {
     icon: <Sun className="size-4" />,
     accent: "text-amber-400",
     glow: "from-amber-500/30",
-    description: "Peak season — meadows in full bloom, snow-fed rivers, ideal for high-altitude Ladakh trips.",
+    description: "Peak season - meadows in full bloom, snow-fed rivers, ideal for high-altitude Ladakh trips.",
   },
   {
     id: "autumn",

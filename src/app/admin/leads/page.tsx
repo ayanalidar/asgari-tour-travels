@@ -147,7 +147,7 @@ function LeadsInner() {
             <Calendar className="size-3" />
             {new Date(r.travelDate).toLocaleDateString("en-IN")}
           </span>
-        ) : <span className="text-xs text-muted-foreground">—</span>
+        ) : <span className="text-xs text-muted-foreground">-</span>
       ),
     },
     {

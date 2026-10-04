@@ -146,7 +146,7 @@ export function NewsletterPopup() {
                   </h3>
                   <p className="mt-2 text-sm text-muted-foreground">
                     Join 5,000+ travellers receiving exclusive deals, seasonal guides & early-bird
-                    discounts. No spam — unsubscribe anytime.
+                    discounts. No spam - unsubscribe anytime.
                   </p>
                   <form onSubmit={handleSubmit} className="mt-5 space-y-3">
                     <div className="relative">

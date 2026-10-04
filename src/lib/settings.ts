@@ -1,4 +1,4 @@
-// Site settings cache — fetches settings as a flat object
+// Site settings cache - fetches settings as a flat object
 import { db } from '@/lib/db'
 import { parseJSON } from '@/lib/types'
 

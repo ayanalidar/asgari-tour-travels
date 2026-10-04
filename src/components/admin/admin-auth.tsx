@@ -81,7 +81,7 @@ export function useAdminAuth() {
   return ctx;
 }
 
-// Guard component — wraps protected admin pages
+// Guard component - wraps protected admin pages
 export function AdminGuard({ children }: { children: React.ReactNode }) {
   const { isAuthed, isReady } = useAdminAuth();
   if (!isReady) {

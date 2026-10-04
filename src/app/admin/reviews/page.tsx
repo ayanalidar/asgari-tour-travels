@@ -70,7 +70,7 @@ export default function AdminReviewsPage() {
     } else toast.error(res.error || "Failed");
   };
 
-  const avgRating = data.length > 0 ? (data.reduce((s, r) => s + r.rating, 0) / data.length).toFixed(1) : "—";
+  const avgRating = data.length > 0 ? (data.reduce((s, r) => s + r.rating, 0) / data.length).toFixed(1) : "-";
 
   const columns: Column<ReviewRow>[] = [
     {

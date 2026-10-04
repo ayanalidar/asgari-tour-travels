@@ -8,9 +8,9 @@ import { CTASection } from "@/components/site/CTASection"
 import { GitCompare } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Compare Destinations — Kashmir & Ladakh Side-by-Side",
+  title: "Compare Destinations - Kashmir & Ladakh Side-by-Side",
   description:
-    "Compare Kashmir & Ladakh destinations side by side — altitude, best time to visit, duration, things to do, how to reach. Make an informed choice.",
+    "Compare Kashmir & Ladakh destinations side by side - altitude, best time to visit, duration, things to do, how to reach. Make an informed choice.",
   keywords: [
     "compare Kashmir destinations",
     "Gulmarg vs Pahalgam",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Compare Kashmir & Ladakh Destinations",
     description:
-      "Side-by-side destination comparison — altitude, best time, things to do & more.",
+      "Side-by-side destination comparison - altitude, best time, things to do & more.",
   },
 }
 
@@ -50,7 +50,7 @@ export default async function ComparePage() {
             </h1>
             <p className="mx-auto mt-4 max-w-xl text-base text-muted-foreground sm:text-lg">
               Can't decide between Gulmarg & Pahalgam? Or Pangong vs Nubra? Pick up to 3 destinations
-              and compare altitude, best time, things to do & more — all in one view.
+              and compare altitude, best time, things to do & more - all in one view.
             </p>
           </div>
         </div>

@@ -1,4 +1,4 @@
-// Image upload utility — stores base64 / multipart files into /public/uploads
+// Image upload utility - stores base64 / multipart files into /public/uploads
 import { writeFile, mkdir } from "fs/promises"
 import path from "path"
 import { randomUUID } from "crypto"
@@ -24,7 +24,7 @@ export async function saveBase64Image(dataUrl: string, prefix = "img"): Promise<
   return `/uploads/${name}`
 }
 
-// Save a File (multipart) — returns public path
+// Save a File (multipart) - returns public path
 export async function saveFile(file: File, prefix = "img"): Promise<string> {
   await ensureUploadDir()
   const ext = file.name.split(".").pop() || "jpg"

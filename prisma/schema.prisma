@@ -1,4 +1,4 @@
-// Asgari Tour & Travels — Prisma schema
+// Asgari Tour & Travels - Prisma schema
 // learn more: https://pris.ly/d/prisma-schema
 
 generator client {
@@ -11,7 +11,7 @@ datasource db {
 }
 
 // ============================================================
-// DESTINATIONS — SEO pages for Kashmir & Ladakh locations
+// DESTINATIONS - SEO pages for Kashmir & Ladakh locations
 // ============================================================
 model Destination {
   id              String   @id @default(cuid())
@@ -48,7 +48,7 @@ model Destination {
 }
 
 // ============================================================
-// THINGS TO DO / ACTIVITIES — SEO pages
+// THINGS TO DO / ACTIVITIES - SEO pages
 // ============================================================
 model Activity {
   id              String   @id @default(cuid())
@@ -148,7 +148,7 @@ model PackageCoupon {
 }
 
 // ============================================================
-// BLOG / ARTICLES — SEO content
+// BLOG / ARTICLES - SEO content
 // ============================================================
 model BlogPost {
   id              String   @id @default(cuid())
@@ -212,7 +212,7 @@ model Testimonial {
 }
 
 // ============================================================
-// GOOGLE RATINGS — synced reviews
+// GOOGLE RATINGS - synced reviews
 // ============================================================
 model GoogleReview {
   id              String   @id @default(cuid())
@@ -261,7 +261,7 @@ model SeoPage {
 }
 
 // ============================================================
-// SITE SETTINGS (key-value) — hostinger, contact, social, etc.
+// SITE SETTINGS (key-value) - hostinger, contact, social, etc.
 // ============================================================
 model SiteSetting {
   id              String   @id @default(cuid())

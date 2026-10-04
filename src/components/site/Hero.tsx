@@ -88,7 +88,7 @@ export function Hero({
               transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="mx-auto max-w-xl text-base text-muted-foreground sm:text-lg lg:mx-0"
             >
-              Curated luxury journeys across the Himalayas — from houseboats on Dal Lake to
+              Curated luxury journeys across the Himalayas - from houseboats on Dal Lake to
               the world's highest motorable roads in Ladakh. 15+ years of local expertise.
               Customised itineraries in 24 hours.
             </motion.p>

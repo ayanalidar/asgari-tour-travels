@@ -18,9 +18,9 @@ import { Button } from "@/components/ui/button"
 export const revalidate = 600
 
 export const metadata: Metadata = {
-  title: "Ladakh Tour Packages — Leh, Pangong, Nubra & Khardung La",
+  title: "Ladakh Tour Packages - Leh, Pangong, Nubra & Khardung La",
   description:
-    "The land of high passes — Leh, Pangong Lake, Nubra Valley, Khardung La & ancient monasteries. Curated Ladakh tour packages with permits, acclimatization & expert guides.",
+    "The land of high passes - Leh, Pangong Lake, Nubra Valley, Khardung La & ancient monasteries. Curated Ladakh tour packages with permits, acclimatization & expert guides.",
   alternates: { canonical: "/ladakh" },
   keywords: [
     "Ladakh tour packages", "Leh Ladakh", "Pangong Lake", "Nubra Valley",
@@ -61,7 +61,7 @@ export default async function LadakhPage() {
     {
       icon: <Wind className="size-5" />,
       title: "Best season",
-      desc: "Mid-May to mid-October. Roads close in winter — plan around the weather window.",
+      desc: "Mid-May to mid-October. Roads close in winter - plan around the weather window.",
     },
     {
       icon: <Compass className="size-5" />,
@@ -90,13 +90,13 @@ export default async function LadakhPage() {
       {/* Intro */}
       <section className="container mx-auto max-w-7xl px-4 sm:px-6 py-12 sm:py-16">
         <SectionHeading
-          eyebrow="Ladakh — Land of High Passes"
+          eyebrow="Ladakh - Land of High Passes"
           title={
             <>
               The <span className="gradient-text-saffron">cold desert</span> of the Himalayas
             </>
           }
-          subtitle="Ladakh is a high-altitude cold desert perched between the Karakoram and the Himalayas — a surreal moonscape of turquoise lakes, ancient monasteries, snow-capped passes and the world's highest motorable roads."
+          subtitle="Ladakh is a high-altitude cold desert perched between the Karakoram and the Himalayas - a surreal moonscape of turquoise lakes, ancient monasteries, snow-capped passes and the world's highest motorable roads."
         />
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {facts.map((f, i) => (
@@ -122,7 +122,7 @@ export default async function LadakhPage() {
                 <span className="gradient-text-mix">Ladakh</span> destinations
               </>
             }
-            subtitle="From Leh town to the salt flats of Tso Kar — explore every corner of the Land of High Passes."
+            subtitle="From Leh town to the salt flats of Tso Kar - explore every corner of the Land of High Passes."
           />
           <Button asChild variant="outline" size="sm">
             <Link href="/destinations?region=ladakh">
@@ -181,9 +181,9 @@ export default async function LadakhPage() {
             <h3 className="font-display text-lg font-bold mb-3 text-primary">Altitude & AMS</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li className="flex gap-2"><MapPin className="size-4 mt-0.5 text-primary shrink-0" /> Leh: 3,500m · Khardung La: 5,359m · Pangong: 4,350m</li>
-              <li>Rest on day 1 — no exertion, no stairs, no alcohol</li>
+              <li>Rest on day 1 - no exertion, no stairs, no alcohol</li>
               <li>Hydrate aggressively: 3-4 litres water daily</li>
-              <li>Consider Diamox (acetazolamide) — consult your doctor</li>
+              <li>Consider Diamox (acetazolamide) - consult your doctor</li>
               <li>Don't attempt Khardung La / Pangong on day 2</li>
               <li>Descend immediately if severe AMS symptoms appear</li>
             </ul>
@@ -193,7 +193,7 @@ export default async function LadakhPage() {
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>Inner Line Permit (ILP) required for Pangong, Nubra, Tso Moriri, Hanle</li>
               <li>Indian nationals: Aadhaar + photo + nominal fee (we handle this)</li>
-              <li>Foreign nationals: Protected Area Permit (PAP) — we arrange group PAPs</li>
+              <li>Foreign nationals: Protected Area Permit (PAP) - we arrange group PAPs</li>
               <li>Carry 6+ passport photos &amp; ID copies for permits &amp; checkpoints</li>
               <li>Permit fees &amp; processing included in every Asgari Ladakh package</li>
             </ul>
@@ -204,7 +204,7 @@ export default async function LadakhPage() {
       <section className="container mx-auto max-w-7xl px-4 sm:px-6 pb-16 sm:pb-24">
         <CTASection
           title="Ready for the land of high passes?"
-          subtitle="Get a customised Ladakh itinerary within 24 hours — including permits, acclimatization days & expert guides."
+          subtitle="Get a customised Ladakh itinerary within 24 hours - including permits, acclimatization days & expert guides."
           primaryHref="/packages?region=ladakh"
           primaryLabel="View Ladakh Packages"
           secondaryHref="/contact"

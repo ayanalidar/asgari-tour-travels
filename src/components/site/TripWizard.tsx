@@ -149,7 +149,7 @@ export function TripWizard({ destinations }: TripWizardProps) {
               <StepHeader
                 icon={<MapPin className="size-5" />}
                 title="Where do you want to go?"
-                subtitle="Pick one or more destinations — we'll craft a seamless journey."
+                subtitle="Pick one or more destinations - we'll craft a seamless journey."
               />
               <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
                 {destinations.slice(0, 12).map((d) => {
@@ -293,7 +293,7 @@ export function TripWizard({ destinations }: TripWizardProps) {
               <StepHeader
                 icon={<Sparkles className="size-5" />}
                 title="Almost there!"
-                subtitle="Share your contact details — we'll craft your custom itinerary in 24 hours."
+                subtitle="Share your contact details - we'll craft your custom itinerary in 24 hours."
               />
               <div className="mt-6 space-y-4">
                 <div>

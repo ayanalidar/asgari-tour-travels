@@ -17,9 +17,9 @@ import { Button } from "@/components/ui/button"
 export const revalidate = 600
 
 export const metadata: Metadata = {
-  title: "Contact Us — Asgari Tour & Travels",
+  title: "Contact Us - Asgari Tour & Travels",
   description:
-    "Get in touch with Asgari Tour & Travels — call, email or WhatsApp us. Srinagar-based team, 24/7 support, customised itineraries within 24 hours.",
+    "Get in touch with Asgari Tour & Travels - call, email or WhatsApp us. Srinagar-based team, 24/7 support, customised itineraries within 24 hours.",
   alternates: { canonical: "/contact" },
 }
 
@@ -77,7 +77,7 @@ export default async function ContactPage() {
             Let's plan your <span className="gradient-text-saffron">Himalayan escape</span>
           </>
         }
-        subtitle="Reach out by phone, WhatsApp, email — or fill out the form below. Our Srinagar-based team replies within 24 hours, often much faster."
+        subtitle="Reach out by phone, WhatsApp, email - or fill out the form below. Our Srinagar-based team replies within 24 hours, often much faster."
       />
 
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 pb-16 sm:pb-24">
@@ -121,7 +121,7 @@ export default async function ContactPage() {
           <div className="rounded-2xl glass-strong p-6 sm:p-8">
             <h2 className="font-display text-2xl font-bold mb-1">Send us an enquiry</h2>
             <p className="text-sm text-muted-foreground mb-6">
-              Tell us about your dream trip — we'll reply with a customised itinerary within
+              Tell us about your dream trip - we'll reply with a customised itinerary within
               24 hours.
             </p>
             <EnquiryForm />

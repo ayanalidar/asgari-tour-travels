@@ -86,17 +86,17 @@ export default function AdminActivitiesPage() {
     {
       key: "destination",
       header: "Destination",
-      cell: (r) => <span className="text-xs text-muted-foreground">{r.destination?.name || "—"}</span>,
+      cell: (r) => <span className="text-xs text-muted-foreground">{r.destination?.name || "-"}</span>,
     },
     {
       key: "duration",
       header: "Duration",
-      cell: (r) => <span className="text-xs">{r.duration || "—"}</span>,
+      cell: (r) => <span className="text-xs">{r.duration || "-"}</span>,
     },
     {
       key: "bestSeason",
       header: "Best Season",
-      cell: (r) => <span className="text-xs text-muted-foreground">{r.bestSeason || "—"}</span>,
+      cell: (r) => <span className="text-xs text-muted-foreground">{r.bestSeason || "-"}</span>,
     },
     {
       key: "order",

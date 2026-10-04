@@ -12,9 +12,9 @@ import { Button } from "@/components/ui/button"
 export const revalidate = 600
 
 export const metadata: Metadata = {
-  title: "Destinations — Kashmir & Ladakh Travel Guide",
+  title: "Destinations - Kashmir & Ladakh Travel Guide",
   description:
-    "Explore all destinations across Kashmir, Ladakh & Jammu. From Srinagar's Dal Lake to Pangong Tso & Khardung La — discover the crown jewels of the Himalayas with detailed travel guides.",
+    "Explore all destinations across Kashmir, Ladakh & Jammu. From Srinagar's Dal Lake to Pangong Tso & Khardung La - discover the crown jewels of the Himalayas with detailed travel guides.",
   alternates: { canonical: "/destinations" },
 }
 
@@ -39,7 +39,7 @@ export default async function DestinationsPage({
             <span className="gradient-text-saffron">Explore</span> the Himalayas
           </>
         }
-        subtitle="From the floating gardens of Dal Lake to the world's highest motorable road — 40+ destinations across Kashmir, Ladakh & Jammu."
+        subtitle="From the floating gardens of Dal Lake to the world's highest motorable road - 40+ destinations across Kashmir, Ladakh & Jammu."
       />
 
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 pb-16 sm:pb-24">
@@ -70,7 +70,7 @@ export default async function DestinationsPage({
                   Can't decide between destinations?
                 </h3>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Compare up to 3 destinations side by side — altitude, best time, things to do & more.
+                  Compare up to 3 destinations side by side - altitude, best time, things to do & more.
                 </p>
               </div>
             </div>

@@ -9,7 +9,7 @@ import { CTASection } from "@/components/site/CTASection"
 import { Wallet, Sparkles, ShieldCheck, Clock } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Plan Your Custom Trip — Kashmir & Ladakh Itinerary Builder",
+  title: "Plan Your Custom Trip - Kashmir & Ladakh Itinerary Builder",
   description:
     "Build your perfect Kashmir or Ladakh trip. Use our budget calculator and 4-step trip wizard to get a custom itinerary in 24 hours. No upfront payment.",
   keywords: [
@@ -57,7 +57,7 @@ export default async function PlanYourTripPage() {
               <span className="gradient-text-saffron glow-saffron">dream Himalayan</span> journey
             </h1>
             <p className="mx-auto mt-4 max-w-xl text-base text-muted-foreground sm:text-lg">
-              Pick destinations, dates & budget — our concierge crafts a fully customised itinerary
+              Pick destinations, dates & budget - our concierge crafts a fully customised itinerary
               in 24 hours. No templates, no upfront payment.
             </p>
           </div>
@@ -118,7 +118,7 @@ export default async function PlanYourTripPage() {
                 Build a <span className="gradient-text-mix">custom itinerary</span> in 4 steps
               </>
             }
-            subtitle="Tell us where, when, who & how — we handle the rest."
+            subtitle="Tell us where, when, who & how - we handle the rest."
           />
           <div className="mt-10">
             <TripWizard destinations={destData} />

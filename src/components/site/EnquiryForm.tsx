@@ -184,7 +184,7 @@ export function EnquiryForm({
         <Field label="Message">
           <Textarea
             {...register("message")}
-            placeholder="Tell us about your dream Kashmir/Ladakh trip — dates, interests, budget, special needs…"
+            placeholder="Tell us about your dream Kashmir/Ladakh trip - dates, interests, budget, special needs…"
             rows={3}
             className="bg-background/60 resize-none"
           />

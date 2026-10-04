@@ -67,7 +67,7 @@ export default function AdminCouponsPage() {
       cell: (r) => (
         <div>
           <div className="font-mono font-bold text-sm tracking-wider text-primary">{r.code}</div>
-          <div className="text-xs text-muted-foreground truncate max-w-[240px]">{r.description || "—"}</div>
+          <div className="text-xs text-muted-foreground truncate max-w-[240px]">{r.description || "-"}</div>
         </div>
       ),
     },
@@ -104,7 +104,7 @@ export default function AdminCouponsPage() {
     {
       key: "minOrderValue",
       header: "Min Order",
-      cell: (r) => (r.minOrderValue ? `₹${r.minOrderValue.toLocaleString("en-IN")}` : <span className="text-muted-foreground">—</span>),
+      cell: (r) => (r.minOrderValue ? `₹${r.minOrderValue.toLocaleString("en-IN")}` : <span className="text-muted-foreground">-</span>),
     },
     {
       key: "validUntil",

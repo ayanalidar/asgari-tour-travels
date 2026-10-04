@@ -11,9 +11,9 @@ import { Button } from "@/components/ui/button"
 export const revalidate = 600
 
 export const metadata: Metadata = {
-  title: "FAQ — Kashmir & Ladakh Travel Questions",
+  title: "FAQ - Kashmir & Ladakh Travel Questions",
   description:
-    "Frequently asked questions about Kashmir & Ladakh travel — best time, permits, safety, money, weather, altitude, what to pack, and more. Answered by Asgari Tour & Travels.",
+    "Frequently asked questions about Kashmir & Ladakh travel - best time, permits, safety, money, weather, altitude, what to pack, and more. Answered by Asgari Tour & Travels.",
   alternates: { canonical: "/faq" },
 }
 
@@ -21,7 +21,7 @@ const FAQS = [
   {
     category: "Best Time",
     q: "When is the best time to visit Kashmir?",
-    a: "April–May for tulips & spring bloom, June–August for family holidays and Gulmarg meadows, September–October for golden autumn colours and saffron harvest, and December–February for snow and Gulmarg skiing. Each season has its own magic — tell us what you love and we'll match you to the right month.",
+    a: "April–May for tulips & spring bloom, June–August for family holidays and Gulmarg meadows, September–October for golden autumn colours and saffron harvest, and December–February for snow and Gulmarg skiing. Each season has its own magic - tell us what you love and we'll match you to the right month.",
   },
   {
     category: "Best Time",
@@ -31,7 +31,7 @@ const FAQS = [
   {
     category: "Safety",
     q: "Is Ladakh safe for solo / female travellers?",
-    a: "Yes — Ladakh is one of the safest regions in India for solo and female travellers. Crime rates are extremely low, locals are respectful, and our team includes female travel designers who understand the specific concerns. We've guided many solo female travellers from across India and abroad.",
+    a: "Yes - Ladakh is one of the safest regions in India for solo and female travellers. Crime rates are extremely low, locals are respectful, and our team includes female travel designers who understand the specific concerns. We've guided many solo female travellers from across India and abroad.",
   },
   {
     category: "Safety",
@@ -41,7 +41,7 @@ const FAQS = [
   {
     category: "Permits & Altitude",
     q: "Do I need permits for Ladakh?",
-    a: "Yes — an Inner Line Permit (ILP) is required for Indian nationals visiting Pangong, Nubra, Tso Moriri, Hanle and certain other areas. Foreign nationals need a Protected Area Permit (PAP). All Asgari Ladakh packages include permit arrangements — we handle the paperwork, you just need to carry 6+ passport photos and ID copies.",
+    a: "Yes - an Inner Line Permit (ILP) is required for Indian nationals visiting Pangong, Nubra, Tso Moriri, Hanle and certain other areas. Foreign nationals need a Protected Area Permit (PAP). All Asgari Ladakh packages include permit arrangements - we handle the paperwork, you just need to carry 6+ passport photos and ID copies.",
   },
   {
     category: "Permits & Altitude",
@@ -51,7 +51,7 @@ const FAQS = [
   {
     category: "Permits & Altitude",
     q: "What is the Srinagar-Leh highway like?",
-    a: "The 434-km Srinagar-Leh highway is one of India's most scenic road journeys — crossing Zoji La pass (3,528m), Drass (one of the coldest inhabited places), Kargil, Fotu La and Lamayuru. The road is paved for most of the route but single-lane and dramatic in places. We cross it in 2 days with an overnight in Kargil. Open May-September only.",
+    a: "The 434-km Srinagar-Leh highway is one of India's most scenic road journeys - crossing Zoji La pass (3,528m), Drass (one of the coldest inhabited places), Kargil, Fotu La and Lamayuru. The road is paved for most of the route but single-lane and dramatic in places. We cross it in 2 days with an overnight in Kargil. Open May-September only.",
   },
   {
     category: "Stays & Food",
@@ -61,22 +61,22 @@ const FAQS = [
   {
     category: "Stays & Food",
     q: "What's the food like?",
-    a: "Kashmiri cuisine is rich and meat-heavy (Wazwan feast — Rogan Josh, Gushtaba, Rista). Vegetarian options are widely available. Ladakhi food is simpler — thukpa (noodle soup), momos, skyu (pasta). All our hotels serve Indian, continental and local options. Tell us your dietary needs and we'll arrange accordingly.",
+    a: "Kashmiri cuisine is rich and meat-heavy (Wazwan feast - Rogan Josh, Gushtaba, Rista). Vegetarian options are widely available. Ladakhi food is simpler - thukpa (noodle soup), momos, skyu (pasta). All our hotels serve Indian, continental and local options. Tell us your dietary needs and we'll arrange accordingly.",
   },
   {
     category: "Booking & Payment",
     q: "What is the cancellation policy?",
-    a: "Free cancellation up to 15 days before departure (full refund minus payment gateway charges). 15-7 days before: 50% refund. Less than 7 days: no refund. Force majeure (weather, road closures, government advisories): full credit for future travel. We're flexible — talk to us.",
+    a: "Free cancellation up to 15 days before departure (full refund minus payment gateway charges). 15-7 days before: 50% refund. Less than 7 days: no refund. Force majeure (weather, road closures, government advisories): full credit for future travel. We're flexible - talk to us.",
   },
   {
     category: "Booking & Payment",
     q: "How do I pay? Are there EMI options?",
-    a: "We accept UPI, bank transfer, credit/debit cards and international wire. A 25% advance confirms your booking; balance due 7 days before departure. EMI options available on credit cards for packages above ₹30,000 — ask our team.",
+    a: "We accept UPI, bank transfer, credit/debit cards and international wire. A 25% advance confirms your booking; balance due 7 days before departure. EMI options available on credit cards for packages above ₹30,000 - ask our team.",
   },
   {
     category: "Booking & Payment",
     q: "Can I customise a package?",
-    a: "Yes! Every package on our site is a starting point — extend days, add destinations, upgrade hotels, include special experiences (candle-lit dinner, helicopter ride, private shikara). Our team will craft a custom itinerary within 24 hours of your enquiry. No extra charge for customisation.",
+    a: "Yes! Every package on our site is a starting point - extend days, add destinations, upgrade hotels, include special experiences (candle-lit dinner, helicopter ride, private shikara). Our team will craft a custom itinerary within 24 hours of your enquiry. No extra charge for customisation.",
   },
   {
     category: "Booking & Payment",
@@ -86,12 +86,12 @@ const FAQS = [
   {
     category: "Packing & Prep",
     q: "What should I pack?",
-    a: "Layered clothing is key — even in summer, Gulmarg and Pangong evenings drop to 5°C. Essentials: warm fleece/jacket, rain shell (monsoon), sturdy walking shoes, sunglasses, sunscreen (UV is intense at altitude), personal medication, and original ID (for permits). For winter: sub-zero thermals, snow boots, gloves, balaclava. We send a detailed packing list with every booking.",
+    a: "Layered clothing is key - even in summer, Gulmarg and Pangong evenings drop to 5°C. Essentials: warm fleece/jacket, rain shell (monsoon), sturdy walking shoes, sunglasses, sunscreen (UV is intense at altitude), personal medication, and original ID (for permits). For winter: sub-zero thermals, snow boots, gloves, balaclava. We send a detailed packing list with every booking.",
   },
   {
     category: "Packing & Prep",
     q: "Can elderly travellers or those with mobility issues visit?",
-    a: "Yes, with the right itinerary. Srinagar, Gulmarg (gondola accessible), Pahalgam, and Leh town itself are manageable. We pace itineraries slower, choose accessible hotels, and arrange wheelchair-friendly vehicles on request. High-altitude areas (Khardung La, Pangong) may not be suitable for severe cardiac/respiratory conditions — please consult your doctor.",
+    a: "Yes, with the right itinerary. Srinagar, Gulmarg (gondola accessible), Pahalgam, and Leh town itself are manageable. We pace itineraries slower, choose accessible hotels, and arrange wheelchair-friendly vehicles on request. High-altitude areas (Khardung La, Pangong) may not be suitable for severe cardiac/respiratory conditions - please consult your doctor.",
   },
 ]
 
@@ -109,7 +109,7 @@ export default async function FAQPage() {
             Questions, <span className="gradient-text-saffron">answered</span>
           </>
         }
-        subtitle="Everything you wanted to know about travelling to Kashmir & Ladakh — answered by our team of local experts. Still have questions? Just message us."
+        subtitle="Everything you wanted to know about travelling to Kashmir & Ladakh - answered by our team of local experts. Still have questions? Just message us."
       />
 
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 pb-16 sm:pb-24">
@@ -154,7 +154,7 @@ export default async function FAQPage() {
               <h3 className="font-display text-base font-bold mb-2">Quick tips</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>• Acclimatize 2 days before Khardung La</li>
-                <li>• Carry cash — limited ATMs in Ladakh</li>
+                <li>• Carry cash - limited ATMs in Ladakh</li>
                 <li>• Inner Line Permits are mandatory for Pangong/Nubra</li>
                 <li>• Best Ladakh window: May 15 - Oct 15</li>
                 <li>• Book houseboats 60+ days in advance</li>

@@ -119,7 +119,7 @@ export default function AdminPackagesPage() {
       header: "Destinations",
       cell: (r) => (
         <div className="text-xs text-muted-foreground truncate max-w-[220px]">
-          {r.destinations.map((d) => d.name).join(", ") || "—"}
+          {r.destinations.map((d) => d.name).join(", ") || "-"}
         </div>
       ),
     },

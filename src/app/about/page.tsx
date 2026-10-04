@@ -26,7 +26,7 @@ import { Button } from "@/components/ui/button"
 export const revalidate = 600
 
 export const metadata: Metadata = {
-  title: "About Us — Asgari Tour & Travels",
+  title: "About Us - Asgari Tour & Travels",
   description:
     "Asgari Tour & Travels is a Srinagar-based boutique travel company specialising in curated luxury tours across Kashmir and Ladakh. 15+ years of local expertise.",
   alternates: { canonical: "/about" },
@@ -64,7 +64,7 @@ export default async function AboutPage() {
     {
       icon: <Compass className="size-5" />,
       title: "Stewardship",
-      desc: "We give back to the mountains — employing locals, supporting eco-stays, leaving no trace.",
+      desc: "We give back to the mountains - employing locals, supporting eco-stays, leaving no trace.",
     },
   ]
 
@@ -115,13 +115,13 @@ export default async function AboutPage() {
               </p>
               <p>
                 Fifteen years on, we've grown into a 30-person team of Srinagar and Leh-based
-                travel designers, drivers, guides, and hospitality partners — but the spirit
+                travel designers, drivers, guides, and hospitality partners - but the spirit
                 hasn't changed. Every itinerary is still hand-crafted around the traveller, and
                 every guest is still welcomed like family.
               </p>
               <p>
                 We've guided over 15,000 travellers across the Pir Panjal, Zanskar and Karakoram
-                ranges — and earned a 4.9★ rating on Google for keeping our promises: fair
+                ranges - and earned a 4.9★ rating on Google for keeping our promises: fair
                 prices, honest advice, and journeys that linger in memory long after the trip
                 ends.
               </p>
@@ -203,7 +203,7 @@ export default async function AboutPage() {
                 <span className="gradient-text-saffron">Local experts</span> who know these mountains
               </>
             }
-            subtitle="Our team is our family. Every one of them is from Kashmir or Ladakh — and every one of them is personally invested in your journey."
+            subtitle="Our team is our family. Every one of them is from Kashmir or Ladakh - and every one of them is personally invested in your journey."
           />
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {team.map((m, i) => (

@@ -549,3 +549,87 @@ Unresolved / Next Steps:
 - agent-browser full-page verification: persistently blocked by 4GB RAM (server OOM-killed when Chrome loads; each page verified via curl instead)
 - Future feature ideas: interactive destination map with pins, weather/season widget, multi-language, user accounts + saved trips/wishlist, payment integration, package comparison tool, activity booking calendar, "best for" filtering on packages page
 - The recurring 15-min cron job (job_id: 434245) will continue picking up these in subsequent rounds
+
+---
+Task ID: 14 (user request batch)
+Agent: main (orchestrator)
+Task: Check navigation, verify admin editability, remove em dashes, add weather widget, fetch real contact data, verify WhatsApp button
+
+Current Project Status:
+- Project stable from Tasks 1-13 (36 destinations, 12 packages, 10 blog posts, 14 testimonials, 15 activities, full CMS, many features)
+- All navigation routes verified working (200 responses)
+- All content editable in admin panel (verified all 29 admin API routes + 28 admin pages exist for: destinations, packages, coupons, blog, testimonials, activities, gallery, SEO pages, reviews, leads, settings, hostinger, google, stats, upload, auth)
+- Lint 100% clean (0 errors, 0 warnings)
+
+Work Log:
+1. **Navigation check** - verified all 9 nav links (Home, Destinations, Packages, Compare, Plan Trip, Ladakh, Blog, About, Contact) all return 200. Mobile nav sheet works.
+
+2. **Admin editability verification** - confirmed complete admin CMS:
+   - Destinations: list + new + edit + API (CRUD)
+   - Packages: list + new + edit + API (CRUD with destination linking)
+   - Coupons: list + new + edit + API (CRUD with package linking)
+   - Blog: list + new + edit + API (CRUD)
+   - Testimonials: list + new + edit + API (CRUD)
+   - Activities: list + new + edit + API (CRUD)
+   - Gallery: list + new + edit + API (CRUD)
+   - SEO Pages: list + new + edit + API (CRUD)
+   - Reviews: list + inline add dialog + API (CRUD) + Google sync
+   - Leads CRM: Kanban + table + notes + CSV export + API (CRUD)
+   - Settings: tabbed (general, contact, social, hostinger, google) + API
+   - Upload, auth, stats, hostinger test/sync/logs, google sync
+
+3. **Removed em dashes " — " from EVERYWHERE** - replaced with " - " (hyphen) across:
+   - All 45 source files in src/ and prisma/ (403 occurrences with spaces + 13 standalone = 416 total)
+   - All database content: 36 destinations, 12 packages, 10 blog posts, 15 activities, 7 testimonials updated
+   - Verified: 0 em dashes in rendered HTML (checked / and /destinations/srinagar)
+   - NOTE FOR FUTURE: do NOT use " — " (em dash), use " - " (hyphen) instead
+
+4. **Real contact data fetched from https://asgaritourandtravel.com/** using web-reader skill (page_reader function). Extracted:
+   - Phone: +91 70063 35618
+   - Email: Asgaritourandtravel@gmail.com
+   - WhatsApp: https://wa.me/917006335618
+   - Updated all 8 settings in DB (phone_primary, phone_whatsapp, email_primary, email_bookings, address, social_whatsapp, brand_name, brand_tagline)
+   - Verified via /api/public/settings returns correct real data
+
+5. **Real-time Weather Widget** (src/components/site/WeatherWidget.tsx) - new component added to ALL destination detail pages in the sidebar. Features:
+   - Uses free Open-Meteo API (no API key needed) by destination lat/lng
+   - Shows: current temperature (large gradient display), weather condition (icon + label), feels-like temp, daily high/low
+   - Details grid: wind speed, humidity, visibility
+   - Sunrise/sunset times (IST)
+   - Manual refresh button + auto-refresh every 10 minutes
+   - Loading spinner + error states (with altitude fallback display)
+   - Weather code → icon mapping (Clear/Partly cloudy/Foggy/Drizzle/Rain/Snow/Thunderstorm)
+   - Added to destination page sidebar before the enquiry form
+   - Verified: "Live Weather" + "WeatherWidget" + "open-meteo" confirmed on /destinations/srinagar
+
+6. **WhatsApp button verified** - the floating WhatsApp button (src/components/site/WhatsAppButton.tsx) already existed and is included in PublicLayout. Now uses the REAL WhatsApp number (wa.me/917006335618) from updated settings. Verified: aria-label="Chat on WhatsApp" + wa.me/917006335618 confirmed on landing page.
+
+Verification Results:
+- `bun run lint` → 0 errors, 0 warnings ✓
+- All 9 nav routes → 200 ✓
+- Em dashes: 0 in source, 0 in DB, 0 in rendered HTML ✓
+- Contact data: phone +91 70063 35618, email Asgaritourandtravel@gmail.com, WhatsApp wa.me/917006335618 ✓
+- Weather widget: present on destination pages, uses Open-Meteo API ✓
+- WhatsApp button: present, uses real number ✓
+- Admin panel: all content editable (29 API routes, 28 admin pages) ✓
+
+Suggestions for More Features (for future rounds):
+- Interactive destination map with pins (using Leaflet/Mapbox)
+- Multi-language support (Hindi/Arabic for Gulf tourists)
+- User accounts + saved trips/wishlist
+- Payment integration (Razorpay/UPI)
+- Package comparison tool (side-by-side)
+- Activity booking calendar with availability
+- Destination "best for" filtering on packages page too
+- Live chat widget (beyond WhatsApp)
+- Travel insurance quote integration
+- Currency converter for international visitors
+- PDF itinerary download
+- Social media feed integration (Instagram)
+- Departure calendar with group joining options
+- Loyalty/rewards program
+- Affiliate/referral program
+
+Unresolved / Next Steps:
+- agent-browser full-page verification: persistently blocked by 4GB RAM
+- The recurring 15-min cron job (job_id: 434245) will continue picking up feature suggestions above

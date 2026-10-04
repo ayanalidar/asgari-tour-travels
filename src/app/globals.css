@@ -45,7 +45,7 @@
   --radius-2xl: calc(var(--radius) + 8px);
 }
 
-/* ===== FUTURISTIC DARK THEME — Asgari Tour & Travels ===== */
+/* ===== FUTURISTIC DARK THEME - Asgari Tour & Travels ===== */
 :root {
   --radius: 0.875rem;
 
@@ -59,7 +59,7 @@
   --popover: oklch(0.16 0.012 240);
   --popover-foreground: oklch(0.97 0.01 60);
 
-  /* Saffron gold primary — Kashmir saffron */
+  /* Saffron gold primary - Kashmir saffron */
   --primary: oklch(0.78 0.16 75);
   --primary-foreground: oklch(0.16 0.02 60);
 

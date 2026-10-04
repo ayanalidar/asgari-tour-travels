@@ -102,7 +102,7 @@ export function BookingModal({ open, onOpenChange, pkg }: BookingModalProps) {
           travelDate,
           groupSize,
           budget: `${formatPrice(pricing.subtotal, currency)} total (${formatPrice(pricing.perPerson, currency)}/person)${coupon ? ` [coupon: ${coupon.code}]` : ""}`,
-          message: message || `Booking request: ${pkg.title} — ${pkg.durationNights}N/${pkg.durationDays}D, ${groupSize} travellers, depart ${travelDate || "flexible"}`,
+          message: message || `Booking request: ${pkg.title} - ${pkg.durationNights}N/${pkg.durationDays}D, ${groupSize} travellers, depart ${travelDate || "flexible"}`,
           source: "booking-modal",
           destination: pkg.title,
         }),
@@ -254,7 +254,7 @@ export function BookingModal({ open, onOpenChange, pkg }: BookingModalProps) {
                     </div>
                     {coupon && (
                       <p className="mt-1.5 flex items-center gap-1 text-xs text-accent">
-                        <Check className="size-3" /> {coupon.code} applied — save {formatPrice(pricing.savings, currency)}
+                        <Check className="size-3" /> {coupon.code} applied - save {formatPrice(pricing.savings, currency)}
                       </p>
                     )}
                     <p className="mt-1 text-[10px] text-muted-foreground">

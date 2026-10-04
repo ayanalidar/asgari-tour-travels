@@ -18,7 +18,7 @@ interface ImageWithFallbackProps {
  * Uses plain <img> tag (works with /uploads/ paths without next/image domain config).
  *
  * State pattern: track the last src that errored. When the incoming src differs,
- * we know it's a fresh attempt — no effect needed (avoids cascading renders).
+ * we know it's a fresh attempt - no effect needed (avoids cascading renders).
  */
 export function ImageWithFallback({
   src,

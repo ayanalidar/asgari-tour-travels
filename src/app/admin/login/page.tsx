@@ -50,7 +50,7 @@ function LoginForm() {
             </div>
             <h1 className="font-display text-2xl font-bold gradient-text-saffron">Asgari Admin</h1>
             <p className="text-sm text-muted-foreground mt-1">
-              Tour & Travels CMS — Kashmir & Ladakh
+              Tour & Travels CMS - Kashmir & Ladakh
             </p>
           </div>
 

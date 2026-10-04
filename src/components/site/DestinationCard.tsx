@@ -77,7 +77,7 @@ export function DestinationCard({
           <DestinationImage
             slug={destination.slug}
             name={destination.name}
-            alt={`${destination.name} — ${destination.tagline ?? "Kashmir/Ladakh destination"}`}
+            alt={`${destination.name} - ${destination.tagline ?? "Kashmir/Ladakh destination"}`}
             className="transition-transform duration-700 group-hover:scale-110"
             eager={index < 4}
           />

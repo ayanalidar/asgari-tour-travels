@@ -51,7 +51,7 @@ export default function AdminSettingsPage() {
 
   const save = async (category: string) => {
     setSaving(true);
-    // Pick keys for category — but settings API just updates by key
+    // Pick keys for category - but settings API just updates by key
     const res = await adminFetch("/api/admin/settings", {
       method: "PUT",
       json: { settings, category },

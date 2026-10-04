@@ -227,10 +227,10 @@ export default function AdminDashboardPage() {
 
       {/* Charts row */}
       <div className="grid lg:grid-cols-3 gap-4">
-        {/* Leads last 7 days — line chart */}
+        {/* Leads last 7 days - line chart */}
         <Card className="glass lg:col-span-2 border-white/10">
           <CardHeader>
-            <CardTitle className="text-base font-semibold">Leads — Last 7 Days</CardTitle>
+            <CardTitle className="text-base font-semibold">Leads - Last 7 Days</CardTitle>
           </CardHeader>
           <CardContent>
             <ChartContainer
@@ -255,7 +255,7 @@ export default function AdminDashboardPage() {
           </CardContent>
         </Card>
 
-        {/* Leads by source — pie chart */}
+        {/* Leads by source - pie chart */}
         <Card className="glass border-white/10">
           <CardHeader>
             <CardTitle className="text-base font-semibold">Leads by Source</CardTitle>

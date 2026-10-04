@@ -222,7 +222,7 @@ export function BudgetCalculator() {
               </Link>
             </Button>
             <p className="mt-2 text-center text-[10px] text-muted-foreground">
-              Estimate only — final quote crafted after consultation. No upfront payment.
+              Estimate only - final quote crafted after consultation. No upfront payment.
             </p>
           </div>
         </div>

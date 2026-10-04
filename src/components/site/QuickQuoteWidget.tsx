@@ -14,7 +14,7 @@ interface QuickQuoteWidgetProps {
 }
 
 /**
- * Floating quick-quote widget — appears on package & destination pages.
+ * Floating quick-quote widget - appears on package & destination pages.
  * Collapsed state: a floating pill button. Expanded: a mini form.
  * Auto-collapses after scroll past 40% of page.
  */

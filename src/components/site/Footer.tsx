@@ -21,7 +21,7 @@ interface FooterProps {
 
 export function Footer({ settings = {} }: FooterProps) {
   const brand = settings.brand_name ?? "Asgari Tour & Travels"
-  const tagline = settings.brand_tagline ?? "Discover Paradise — Kashmir & Ladakh Specialists"
+  const tagline = settings.brand_tagline ?? "Discover Paradise - Kashmir & Ladakh Specialists"
   const phone = settings.phone_primary ?? "+91 94190 00123"
   const email = settings.email_primary ?? "info@asgaritravels.com"
   const address = settings.address ?? "Boulevard Road, Dal Lake, Srinagar, J&K 190001"
@@ -146,7 +146,7 @@ export function Footer({ settings = {} }: FooterProps) {
               Get travel deals & inspiration
             </h3>
             <p className="text-sm text-muted-foreground">
-              Join 15,000+ travellers — exclusive Kashmir & Ladakh offers, monthly.
+              Join 15,000+ travellers - exclusive Kashmir & Ladakh offers, monthly.
             </p>
           </div>
           <NewsletterForm />

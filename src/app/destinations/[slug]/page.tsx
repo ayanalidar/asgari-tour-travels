@@ -28,6 +28,7 @@ import { EnquiryForm } from "@/components/site/EnquiryForm"
 import { GalleryLightbox } from "@/components/site/GalleryLightbox"
 import { DestinationStatsBar } from "@/components/site/DestinationStatsBar"
 import { QuickQuoteWidget } from "@/components/site/QuickQuoteWidget"
+import { WeatherWidget } from "@/components/site/WeatherWidget"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 
@@ -42,7 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const d = await getDestinationBySlug(slug)
   if (!d) return { title: "Destination not found" }
   return {
-    title: d.metaTitle ?? `${d.name} — Travel Guide & Things To Do`,
+    title: d.metaTitle ?? `${d.name} - Travel Guide & Things To Do`,
     description:
       d.metaDescription ?? d.shortDescription,
     keywords: d.metaKeywords?.split(",").map((k) => k.trim()),
@@ -267,6 +268,14 @@ export default async function DestinationDetailPage({ params }: Props) {
 
           {/* Right: sidebar */}
           <aside className="flex flex-col gap-6">
+            {/* Live weather widget */}
+            <WeatherWidget
+              latitude={d.latitude}
+              longitude={d.longitude}
+              destinationName={d.name}
+              altitude={d.altitude}
+            />
+
             <div className="rounded-2xl glass-strong p-5 sticky top-24">
               <h3 className="font-display text-lg font-bold mb-3">Plan Your Trip</h3>
               <p className="text-sm text-muted-foreground mb-4">

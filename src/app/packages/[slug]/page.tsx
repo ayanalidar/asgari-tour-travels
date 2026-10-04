@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const p = await getPackageBySlug(slug)
   if (!p) return { title: "Package not found" }
   return {
-    title: p.metaTitle ?? `${p.title} — Tour Package`,
+    title: p.metaTitle ?? `${p.title} - Tour Package`,
     description: p.metaDescription ?? p.shortDescription,
     alternates: { canonical: `/packages/${p.slug}` },
     openGraph: {
@@ -407,7 +407,7 @@ export default async function PackageDetailPage({ params }: Props) {
                 Plan this trip
               </h3>
               <p className="text-sm text-muted-foreground mb-4">
-                Customise {p.title} — get a free quote in 24 hours.
+                Customise {p.title} - get a free quote in 24 hours.
               </p>
               <EnquiryForm packageId={p.id} packageName={p.title} compact />
             </div>
@@ -416,7 +416,7 @@ export default async function PackageDetailPage({ params }: Props) {
             <div className="rounded-2xl glass p-5">
               <h4 className="font-semibold mb-2">Need help deciding?</h4>
               <p className="text-sm text-muted-foreground mb-3">
-                Chat with our Himalayan expert on WhatsApp — instant replies, no bots.
+                Chat with our Himalayan expert on WhatsApp - instant replies, no bots.
               </p>
               <Button
                 asChild

@@ -51,7 +51,7 @@ export function GalleryLightbox({ images, alt }: GalleryLightboxProps) {
           >
             <ImageWithFallback
               src={src}
-              alt={`${alt} — photo ${i + 1}`}
+              alt={`${alt} - photo ${i + 1}`}
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
             <div className="absolute inset-0 grid place-items-center bg-black/0 transition-colors group-hover:bg-black/30">
@@ -115,7 +115,7 @@ export function GalleryLightbox({ images, alt }: GalleryLightboxProps) {
             >
               <ImageWithFallback
                 src={images[index]}
-                alt={`${alt} — photo ${index + 1}`}
+                alt={`${alt} - photo ${index + 1}`}
                 className="max-h-[85vh] max-w-[90vw] rounded-2xl object-contain"
               />
             </motion.div>

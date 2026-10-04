@@ -20,7 +20,7 @@ interface CTASectionProps {
 
 export function CTASection({
   title = "Ready to discover paradise?",
-  subtitle = "Get a free customised itinerary within 24 hours. No spam, no obligation — just expert local advice from people who know the Himalayas.",
+  subtitle = "Get a free customised itinerary within 24 hours. No spam, no obligation - just expert local advice from people who know the Himalayas.",
   primaryHref = "/packages",
   primaryLabel = "Browse Tour Packages",
   secondaryHref = "/contact",
@@ -62,7 +62,7 @@ export function CTASection({
       >
         <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary backdrop-blur-md">
           <Sparkles className="size-3.5 animate-pulse" />
-          Limited Season Slots — Book Early
+          Limited Season Slots - Book Early
         </span>
       </motion.div>
 

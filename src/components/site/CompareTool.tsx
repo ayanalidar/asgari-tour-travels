@@ -172,7 +172,7 @@ export function CompareTool({ destinations }: CompareToolProps) {
           <CompareRow label="Tagline" icon={<MapPin className="size-4" />} />
           {selectedDests.map((d) => (
             <CompareCell key={d.id}>
-              <p className="text-sm italic text-muted-foreground">{d.tagline || "—"}</p>
+              <p className="text-sm italic text-muted-foreground">{d.tagline || "-"}</p>
             </CompareCell>
           ))}
 
@@ -209,10 +209,10 @@ export function CompareTool({ destinations }: CompareToolProps) {
                       </ul>
                     ) : row.key === "howToReach" ? (
                       <p className="text-xs leading-relaxed text-muted-foreground line-clamp-4">
-                        {val || "—"}
+                        {val || "-"}
                       </p>
                     ) : (
-                      <span className="text-sm font-medium text-foreground">{val || "—"}</span>
+                      <span className="text-sm font-medium text-foreground">{val || "-"}</span>
                     )}
                   </CompareCell>
                 )

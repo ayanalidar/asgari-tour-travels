@@ -69,7 +69,7 @@ export default function AdminSeoPagesPage() {
     {
       key: "metaTitle",
       header: "Meta Title",
-      cell: (r) => <span className="text-xs text-muted-foreground truncate max-w-[260px] block">{r.metaTitle || "—"}</span>,
+      cell: (r) => <span className="text-xs text-muted-foreground truncate max-w-[260px] block">{r.metaTitle || "-"}</span>,
     },
     {
       key: "updatedAt",

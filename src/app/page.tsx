@@ -124,7 +124,7 @@ export default async function HomePage() {
               <span className="gradient-text-saffron">Handpicked</span> destinations
             </>
           }
-          subtitle="From the floating gardens of Dal Lake to the highest motorable road on Earth — discover the crown jewels of Kashmir & Ladakh."
+          subtitle="From the floating gardens of Dal Lake to the highest motorable road on Earth - discover the crown jewels of Kashmir & Ladakh."
         />
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {destinations.slice(0, 8).map((d, i) => (
@@ -140,7 +140,7 @@ export default async function HomePage() {
         </div>
       </Section>
 
-      {/* Season Explorer — interactive best-time-to-visit */}
+      {/* Season Explorer - interactive best-time-to-visit */}
       <Section id="seasons" className="py-16 sm:py-24 relative overflow-hidden bg-gradient-to-b from-transparent via-accent/[0.03] to-transparent">
         <div className="absolute inset-0 -z-10 grid-overlay opacity-20 pointer-events-none" />
         <SectionHeading
@@ -172,7 +172,7 @@ export default async function HomePage() {
                 <span className="gradient-text-saffron">4 steps</span>
               </h2>
               <p className="mt-3 text-base text-muted-foreground">
-                Pick destinations, dates & budget — our trip wizard + budget calculator craft a
+                Pick destinations, dates & budget - our trip wizard + budget calculator craft a
                 custom itinerary in 24 hours. No templates, no upfront payment.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
@@ -217,7 +217,7 @@ export default async function HomePage() {
               Most <span className="gradient-text-mix">loved journeys</span>
             </>
           }
-          subtitle="Curated, all-inclusive tour packages crafted with deep local expertise — covering stays, transfers, permits, guides & 24/7 support."
+          subtitle="Curated, all-inclusive tour packages crafted with deep local expertise - covering stays, transfers, permits, guides & 24/7 support."
         />
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {popular.slice(0, 4).map((p, i) => (
@@ -247,7 +247,7 @@ export default async function HomePage() {
               Curated <span className="gradient-text-saffron">escapes</span> for every traveller
             </>
           }
-          subtitle="Honeymooners, adventurers, families, pilgrims — we have a perfect itinerary for everyone."
+          subtitle="Honeymooners, adventurers, families, pilgrims - we have a perfect itinerary for everyone."
         />
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {featuredPackages.map((p, i) => (
@@ -355,7 +355,7 @@ function WhyChooseSection() {
     {
       icon: <Headset className="size-6" />,
       title: "24/7 On-Trip Support",
-      desc: "Dedicated WhatsApp support throughout your journey — we're one message away, always.",
+      desc: "Dedicated WhatsApp support throughout your journey - we're one message away, always.",
       glow: "from-amber-500/20",
     },
     {
@@ -367,7 +367,7 @@ function WhyChooseSection() {
     {
       icon: <Sparkles className="size-6" />,
       title: "Custom Itineraries",
-      desc: "Every trip is crafted around you — your pace, your interests, your budget. Tailor-made.",
+      desc: "Every trip is crafted around you - your pace, your interests, your budget. Tailor-made.",
       glow: "from-rose-500/20",
     },
   ]
@@ -381,7 +381,7 @@ function WhyChooseSection() {
             The Asgari <span className="gradient-text-mix">difference</span>
           </>
         }
-        subtitle="We're not just a travel agency — we're your Himalayan concierge, crafting journeys that linger in memory long after you return home."
+        subtitle="We're not just a travel agency - we're your Himalayan concierge, crafting journeys that linger in memory long after you return home."
       />
       <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {features.map((f, i) => (

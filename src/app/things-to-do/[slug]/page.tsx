@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const a = await getActivityBySlug(slug)
   if (!a) return { title: "Activity not found" }
   return {
-    title: a.metaTitle ?? `${a.title} — Kashmir & Ladakh Activity`,
+    title: a.metaTitle ?? `${a.title} - Kashmir & Ladakh Activity`,
     description: a.metaDescription ?? a.shortDescription,
     alternates: { canonical: `/things-to-do/${a.slug}` },
     openGraph: {
@@ -222,7 +222,7 @@ export default async function ActivityDetailPage({ params }: Props) {
                 Book this experience
               </h3>
               <p className="text-sm text-muted-foreground mb-4">
-                Add this to your custom itinerary — free quote in 24 hours.
+                Add this to your custom itinerary - free quote in 24 hours.
               </p>
               <EnquiryForm
                 destination={a.destination?.name}
@@ -234,7 +234,7 @@ export default async function ActivityDetailPage({ params }: Props) {
             <div className="rounded-2xl glass p-5">
               <h4 className="font-semibold mb-2">Need help deciding?</h4>
               <p className="text-sm text-muted-foreground mb-3">
-                Chat with our Himalayan expert on WhatsApp — instant replies, no bots.
+                Chat with our Himalayan expert on WhatsApp - instant replies, no bots.
               </p>
               <Button
                 asChild

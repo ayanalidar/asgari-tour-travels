@@ -1,4 +1,4 @@
-// Client-side admin fetch helper — auto-adds x-admin-token header
+// Client-side admin fetch helper - auto-adds x-admin-token header
 const TOKEN_KEY = "asgari_admin_token";
 
 export function getAdminToken(): string | null {
@@ -29,7 +29,7 @@ export function clearAdminToken() {
 }
 
 interface AdminFetchOptions extends RequestInit {
-  // json body helper — pass any object, will be JSON.stringified
+  // json body helper - pass any object, will be JSON.stringified
   json?: any;
   // skip auto-parsing response (return raw Response)
   raw?: boolean;

@@ -9,9 +9,9 @@ import { Breadcrumbs } from "@/components/site/Breadcrumbs"
 export const revalidate = 600
 
 export const metadata: Metadata = {
-  title: "Tour Packages — Kashmir & Ladakh Holiday Deals",
+  title: "Tour Packages - Kashmir & Ladakh Holiday Deals",
   description:
-    "Browse all Kashmir & Ladakh tour packages — honeymoon, adventure, family, pilgrimage. Houseboats, Gulmarg, Pahalgam, Leh, Pangong & more. Customisable itineraries from Asgari Tour & Travels.",
+    "Browse all Kashmir & Ladakh tour packages - honeymoon, adventure, family, pilgrimage. Houseboats, Gulmarg, Pahalgam, Leh, Pangong & more. Customisable itineraries from Asgari Tour & Travels.",
   alternates: { canonical: "/packages" },
 }
 
@@ -32,7 +32,7 @@ export default async function PackagesPage({
             Curated <span className="gradient-text-saffron">Himalayan journeys</span>
           </>
         }
-        subtitle="All-inclusive, fully customisable tour packages across Kashmir & Ladakh. Stays, transfers, permits, guides & 24/7 support — all handled by us."
+        subtitle="All-inclusive, fully customisable tour packages across Kashmir & Ladakh. Stays, transfers, permits, guides & 24/7 support - all handled by us."
       />
 
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 pb-16 sm:pb-24">

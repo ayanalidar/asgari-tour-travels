@@ -56,7 +56,7 @@ export function CouponInput({
         message: `Coupon applied! You saved ${formatPrice(discount)}.`,
       })
       onApplied?.(discount, finalPrice, code.trim().toUpperCase())
-      toast.success(`Coupon applied — you saved ${formatPrice(discount)}!`)
+      toast.success(`Coupon applied - you saved ${formatPrice(discount)}!`)
     } catch (e: any) {
       setResult({
         ok: false,
