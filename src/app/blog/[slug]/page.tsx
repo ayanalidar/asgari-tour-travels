@@ -63,9 +63,20 @@ export default async function BlogPostPage({ params }: Props) {
   ])
   if (!post) notFound()
 
-  const related = allPosts
-    .filter((p) => p.slug !== post.slug && p.category === post.category)
-    .slice(0, 3)
+  // Enhanced related posts: same category → shared tags → fallback to any
+  const sameCategory = allPosts.filter(
+    (p) => p.slug !== post.slug && p.category === post.category
+  )
+  const sameTag = allPosts.filter(
+    (p) =>
+      p.slug !== post.slug &&
+      p.category !== post.category &&
+      (p.tags || []).some((t) => (post.tags || []).includes(t))
+  )
+  const fallback = allPosts.filter(
+    (p) => p.slug !== post.slug && p.category !== post.category
+  )
+  const related = [...sameCategory, ...sameTag, ...fallback].slice(0, 3)
 
   const jsonLd = {
     "@context": "https://schema.org",

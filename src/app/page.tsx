@@ -20,6 +20,7 @@ import { StatsCounter } from "@/components/site/StatsCounter"
 import { RatingBadge } from "@/components/site/RatingBadge"
 import { RatingBadgesRow } from "@/components/site/RatingBadgesRow"
 import { SeasonExplorer } from "@/components/site/SeasonExplorer"
+import { SectionDivider } from "@/components/site/SectionDivider"
 import { Button } from "@/components/ui/button"
 import {
   ShieldCheck,
@@ -152,6 +153,8 @@ export default async function HomePage() {
         <SeasonExplorer destinations={allDestinations} />
       </Section>
 
+      <SectionDivider variant="wave" />
+
       {/* Plan-Your-Trip teaser */}
       <Section className="py-16 sm:py-24">
         <div className="relative overflow-hidden rounded-3xl glass-strong p-8 sm:p-12">
@@ -231,6 +234,8 @@ export default async function HomePage() {
       {/* Why choose us */}
       <WhyChooseSection />
 
+      <SectionDivider variant="dots" />
+
       {/* Featured packages full grid */}
       <Section id="featured-packages" className="py-16 sm:py-24">
         <SectionHeading
@@ -251,6 +256,8 @@ export default async function HomePage() {
 
       {/* Experience strip */}
       <ExperienceStrip />
+
+      <SectionDivider variant="spikes" />
 
       {/* Testimonials */}
       <Section id="testimonials" className="py-16 sm:py-24 bg-gradient-to-b from-transparent via-accent/[0.04] to-transparent">
@@ -296,6 +303,8 @@ export default async function HomePage() {
           </Button>
         </div>
       </Section>
+
+      <SectionDivider variant="gradient" />
 
       {/* CTA */}
       <Section className="py-16 sm:py-24">

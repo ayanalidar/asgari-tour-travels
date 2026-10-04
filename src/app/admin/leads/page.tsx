@@ -4,7 +4,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
-import { KanbanSquare, Table as TableIcon, Plus, Phone, Mail, Calendar, MapPin, User, Inbox, Loader2 } from "lucide-react";
+import { KanbanSquare, Table as TableIcon, Plus, Phone, Mail, Calendar, MapPin, User, Inbox, Loader2, Download } from "lucide-react";
 import { adminFetch } from "@/lib/admin-fetch";
 import { AdminPageHeader } from "@/components/admin/AdminPageHeader";
 import { DataTable, type Column } from "@/components/admin/DataTable";
@@ -186,6 +186,36 @@ function LeadsInner() {
         icon={KanbanSquare}
         actions={
           <>
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={() => {
+                const token = typeof window !== "undefined"
+                  ? localStorage.getItem("asgari_admin_token") || "asgari-admin-2024"
+                  : "asgari-admin-2024"
+                const params = new URLSearchParams()
+                if (statusFilter !== "all") params.set("status", statusFilter)
+                if (sourceFilter !== "all") params.set("source", sourceFilter)
+                const url = `/api/admin/leads/export${params.toString() ? "?" + params.toString() : ""}`
+                fetch(url, { headers: { "x-admin-token": token } })
+                  .then((r) => {
+                    if (!r.ok) throw new Error("Export failed")
+                    return r.blob()
+                  })
+                  .then((blob) => {
+                    const a = document.createElement("a")
+                    a.href = URL.createObjectURL(blob)
+                    a.download = `asgari-leads-${new Date().toISOString().slice(0, 10)}.csv`
+                    a.click()
+                    URL.revokeObjectURL(a.href)
+                    toast.success("Leads exported to CSV")
+                  })
+                  .catch(() => toast.error("Export failed"))
+              }}
+              className="h-8"
+            >
+              <Download className="size-3.5" /> Export CSV
+            </Button>
             <div className="flex items-center gap-1 p-1 rounded-lg bg-white/5 border border-white/10">
               <Button
                 size="sm"

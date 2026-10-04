@@ -370,3 +370,40 @@ Unresolved / Next Steps:
 - Landing page cumulative compilation: the landing page is now very heavy with multiple client components (carousel, search, season explorer, newsletter popup, stats counter, etc.) — may OOM on a warm server. Consider code-splitting or lazy-loading some components in a future round.
 - Future feature ideas: interactive destination map with pins, weather/season widget, multi-language (Hindi/Arabic), user accounts + saved trips/wishlist, payment integration, real-time availability calendar, blog post related-posts algorithm, destination "nearby" recommendations
 - The recurring 15-min cron job (job_id: 434245) will continue picking up these in subsequent rounds
+
+---
+Task ID: 9 (cron review round 5)
+Agent: web-dev reviewer (cron)
+Task: QA verification, seed 15 activities, blog related posts enhancement, CSV export button UI, animated section dividers
+
+Current Project Status:
+- Project stable from Tasks 1-8 (36 destinations all with images, 10 packages, 10 blog posts, 14 testimonials, full CMS, comparison tool, gallery lightbox, scroll progress, global search, booking modal, testimonials carousel, blog search, FAQ search, newsletter popup, CSV export API)
+- Dev server confirmed compiling & serving key routes (200 responses via curl)
+- Memory constraint persists: 4GB sandbox OOM-kills next-server during cumulative route compilation. Each page compiles correctly individually on a fresh server.
+- Lint remained 100% clean throughout (0 errors, 0 warnings)
+
+Work Log:
+- **QA**: Verified server starts, routes return 200. agent-browser still blocked by 4GB memory (documented). Found Activities table was empty (0 rows) — /things-to-do page was using hardcoded fallbacks.
+
+NEW FEATURES BUILT:
+1. **15 Activities Seeded** (prisma/seed-activities.ts) — populated the empty Activities table with 15 real activities linked to destinations: Gondola Ride (Gulmarg), Shikara Ride (Dal Lake), Powder Skiing (Gulmarg), Pony Trek (Pahalgam), Wazwan Cooking Class (Srinagar), Thajiwas Glacier Trek (Sonmarg), Pangong Overnight Camp, Bactrian Camel Ride (Nubra), Monastery Morning Prayers (Thiksey), Saffron Harvest (Pampore), Tarsar Marsar Trek, Heritage Houseboat Stay, Mughal Gardens Walk, Indus River Rafting, Astrophotography at Hanle. Each with category, description, duration, difficulty, best season, SEO metadata. The /things-to-do page now shows real DB content instead of hardcoded fallbacks. Verified: page renders with all 15 activity names confirmed.
+
+2. **Blog Related Posts Enhanced** (src/app/blog/[slug]/page.tsx) — upgraded the related posts algorithm from "same category only" to a 3-tier fallback: (1) same category, (2) shared tags, (3) fallback to any other post. This ensures 3 related posts always show (when available), even for posts in unique categories. Verified: blog detail page renders 200 with related content confirmed.
+
+3. **Admin Leads CSV Export Button** (wired in src/app/admin/leads/page.tsx) — added an "Export CSV" button next to the Kanban/Table view toggle in the Leads CRM page header. The button triggers a client-side download with the admin token, respects current status/source filters, saves as `asgari-leads-YYYY-MM-DD.csv`, and shows a success toast. Uses the /api/admin/leads/export endpoint built in round 4.
+
+STYLING IMPROVEMENTS:
+4. **Animated Section Dividers** (src/components/site/SectionDivider.tsx) — new decorative divider component with 4 variants: (a) wave — animated SVG path that draws on scroll with a saffron→emerald→rose gradient; (b) dots — 5 pulsing dots with staggered animation; (c) spikes — equalizer-style bars with varying heights; (d) gradient — a gradient line with a pulsing glow dot. Added between landing page sections: wave (after Season Explorer), dots (after Why Choose Us), spikes (after Experience Strip), gradient (before CTA). Framer Motion whileInView animations. Verified: landing page renders 200 (785KB) with dividers present.
+
+Verification Results:
+- `bun run lint` → 0 errors, 0 warnings ✓
+- `/things-to-do` → 200 (329KB, "Gondola" + "Shikara" + "Wazwan" + "Bactrian" + "Astrophotography" + "Pony Trek" confirmed) ✓
+- `/blog/best-time-to-visit-kashmir` → 200 (279KB, related posts with season content confirmed) ✓
+- `/` landing page → 200 (785KB, section dividers confirmed) ✓
+- DB: 15 activities (was 0), 14 testimonials, 10 packages, 10 blog posts ✓
+
+Unresolved / Next Steps:
+- agent-browser full-page verification: persistently blocked by 4GB RAM (server OOM-killed when Chrome loads; each page verified via curl instead)
+- Landing page cumulative compilation: still very heavy; OOMs on warm servers. Consider lazy-loading client components with `next/dynamic` in a future round to reduce initial bundle weight.
+- Future feature ideas: interactive destination map with pins, weather/season widget, multi-language (Hindi/Arabic), user accounts + saved trips/wishlist, payment integration, destination "nearby" recommendations, activity detail pages (/things-to-do/[slug])
+- The recurring 15-min cron job (job_id: 434245) will continue picking up these in subsequent rounds
