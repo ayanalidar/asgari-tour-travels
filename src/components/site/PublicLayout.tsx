@@ -2,6 +2,7 @@ import { Navbar } from "./Navbar"
 import { Footer } from "./Footer"
 import { WhatsAppButton } from "./WhatsAppButton"
 import { ScrollProgress } from "./ScrollProgress"
+import { NewsletterPopup } from "./NewsletterPopup"
 
 interface PublicLayoutProps {
   settings?: Record<string, any>
@@ -20,6 +21,7 @@ export function PublicLayout({ settings = {}, children }: PublicLayoutProps) {
       <main className="flex-1 flex flex-col">{children}</main>
       <Footer settings={settings} />
       <WhatsAppButton href={settings.social_whatsapp ?? "https://wa.me/919419000123"} />
+      <NewsletterPopup />
     </>
   )
 }

@@ -330,3 +330,43 @@ Unresolved / Next Steps:
 - agent-browser full-page verification: persistently blocked by 4GB RAM (server OOM-killed when Chrome loads; each page verified via curl instead)
 - Future feature ideas: interactive destination map with pins, weather/season widget, multi-language (Hindi/Arabic), user accounts + saved trips/wishlist, payment integration, real-time availability calendar, exit-intent newsletter popup, blog search/filtering
 - The recurring 15-min cron job (job_id: 434245) will continue picking up these in subsequent rounds
+
+---
+Task ID: 8 (cron review round 4)
+Agent: web-dev reviewer (cron)
+Task: QA verification, blog search, exit-intent newsletter popup, admin lead CSV export, FAQ search, more testimonials
+
+Current Project Status:
+- Project stable from Tasks 1-7 (36 destinations all with images, 10 packages, 10 blog posts, full CMS, comparison tool, gallery lightbox, scroll progress, SeasonExplorer, BudgetCalculator, TripWizard, global search, booking modal, testimonials carousel)
+- Dev server confirmed compiling & serving key routes (200 responses via curl)
+- Memory constraint persists: 4GB sandbox OOM-kills next-server during cumulative route compilation. The landing page is now extremely heavy (multiple client components: carousel + search + season explorer + newsletter popup + all sections) and can OOM on a warm server. Each page compiles correctly individually on a fresh server with NODE_OPTIONS='--max-old-space-size=896'.
+- Lint remained 100% clean throughout (0 errors, 0 warnings)
+
+Work Log:
+- **QA**: Verified server starts, routes return 200 (/faq, /blog), CSV export works, testimonials API. agent-browser still blocked by 4GB memory (documented).
+
+NEW FEATURES BUILT:
+1. **Exit-Intent Newsletter Popup** (src/components/site/NewsletterPopup.tsx) — a smart popup that triggers on exit-intent (mouse leaves through top of viewport) OR after 25 seconds (fallback). Shows a "Get ₹3,000 OFF your first trip" offer with email capture. Features: decorative aurora header with gift icon, localStorage dismissal (permanent — won't re-show to same user), sessionStorage flag (once per session), Framer Motion spring animation, success state with checkmark, "No thanks" dismiss option. Subscribes to /api/public/newsletter. Added to PublicLayout so it appears on all public pages.
+
+2. **Blog Page Search + Filter** (enhanced src/components/site/BlogExplorer.tsx) — added a search box to the blog listing that searches across title, excerpt, category, and tags. Features: live filtering with result count, clear-search button, combined category-tabs + search filtering, "Clear filters" button when no results, Framer Motion layout animations. The category tabs and search work together (AND filter).
+
+3. **FAQ Page Search + Category Filter** (src/components/site/FaqExplorer.tsx + src/app/faq/page.tsx) — rebuilt the FAQ page with a client-side FaqExplorer component. Added categories to all 15 FAQs (Best Time, Safety, Permits & Altitude, Stays & Food, Booking & Payment, Packing & Prep). Features: search box (searches question + answer text), category chip filter, result count badge ("X of Y"), Framer Motion animated accordion items, "Clear filters" button. Replaced the hardcoded Accordion in the FAQ page.
+
+4. **Admin Lead CSV Export** (src/app/api/admin/leads/export/route.ts) — new API endpoint that exports CRM leads as a downloadable CSV file. Features: admin-token protected (401 without token), supports ?status and ?source query filters, proper CSV escaping (handles commas, quotes, newlines), UTF-8 BOM for Excel compatibility, 15 columns (ID, Name, Email, Phone, Destination, Package ID, Travel Date, Group Size, Budget, Status, Source, Priority, Message, Created At, Updated At), filename includes date. Verified: returns valid CSV with headers + data rows, 401 without token.
+
+CONTENT:
+5. **6 more testimonials** seeded (prisma/seed-more-testimonials.ts): Rahul Mehta (photography expedition), Aisha Patel (solo female traveller from London), Captain Rajeev Kumar (elderly Amarnath Yatra), Nikhil & Aishwarya (honeymoon), Dr. Sanjay Agarwal (family trip), Lena Schmidt (cultural trail from Berlin). Total testimonials now 14 (9 featured), was 8. Mix of Google reviews and direct sources, international + domestic travellers.
+
+Verification Results:
+- `bun run lint` → 0 errors, 0 warnings ✓
+- `/faq` → 200 (208KB, "FaqExplorer" + "Search questions" + "Most asked" + "Best Time" + "Permits" confirmed) ✓
+- `/blog` → 200 (221KB, "Search articles" + "Travel Journal" confirmed) ✓
+- `/api/admin/leads/export` with token → 200 (582 bytes, valid CSV with headers + data row) ✓
+- `/api/admin/leads/export` without token → 401 (security enforced) ✓
+- DB: 14 testimonials (9 featured), 3 CRM leads ✓
+
+Unresolved / Next Steps:
+- agent-browser full-page verification: persistently blocked by 4GB RAM (server OOM-killed when Chrome loads; each page verified via curl instead)
+- Landing page cumulative compilation: the landing page is now very heavy with multiple client components (carousel, search, season explorer, newsletter popup, stats counter, etc.) — may OOM on a warm server. Consider code-splitting or lazy-loading some components in a future round.
+- Future feature ideas: interactive destination map with pins, weather/season widget, multi-language (Hindi/Arabic), user accounts + saved trips/wishlist, payment integration, real-time availability calendar, blog post related-posts algorithm, destination "nearby" recommendations
+- The recurring 15-min cron job (job_id: 434245) will continue picking up these in subsequent rounds
