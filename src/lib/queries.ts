@@ -173,3 +173,36 @@ export async function getAllActivities() {
     orderBy: [{ order: 'asc' }],
   })
 }
+
+export async function getActivityBySlug(slug: string) {
+  const a = await db.activity.findUnique({
+    where: { slug },
+    include: { destination: true },
+  })
+  return a
+}
+
+export async function getRelatedActivities(slug: string, category: string, limit = 4) {
+  const related = await db.activity.findMany({
+    where: {
+      status: 'published',
+      slug: { not: slug },
+      category,
+    },
+    take: limit,
+    orderBy: [{ featured: 'desc' }, { order: 'asc' }],
+  })
+  // Fallback to any other activities if not enough in the same category
+  if (related.length < limit) {
+    const more = await db.activity.findMany({
+      where: {
+        status: 'published',
+        slug: { not: slug, notIn: related.map((a) => a.slug) },
+      },
+      take: limit - related.length,
+      orderBy: [{ featured: 'desc' }, { order: 'asc' }],
+    })
+    return [...related, ...more]
+  }
+  return related
+}

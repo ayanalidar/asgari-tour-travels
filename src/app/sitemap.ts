@@ -4,22 +4,26 @@ import {
   getAllPackages,
   getAllBlogPosts,
   getAllSeoPages,
+  getAllActivities,
 } from "@/lib/queries"
 
 const BASE = "https://asgaritravels.com"
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [destinations, packages, posts, seoPages] = await Promise.all([
+  const [destinations, packages, posts, seoPages, activities] = await Promise.all([
     getAllDestinations(),
     getAllPackages(),
     getAllBlogPosts(),
     getAllSeoPages(),
+    getAllActivities(),
   ])
 
   const staticEntries: MetadataRoute.Sitemap = [
     { url: `${BASE}/`, priority: 1, changeFrequency: "weekly" },
     { url: `${BASE}/destinations`, priority: 0.9, changeFrequency: "weekly" },
     { url: `${BASE}/packages`, priority: 0.9, changeFrequency: "weekly" },
+    { url: `${BASE}/compare`, priority: 0.8, changeFrequency: "monthly" },
+    { url: `${BASE}/plan-your-trip`, priority: 0.8, changeFrequency: "monthly" },
     { url: `${BASE}/ladakh`, priority: 0.8, changeFrequency: "monthly" },
     { url: `${BASE}/things-to-do`, priority: 0.7, changeFrequency: "monthly" },
     { url: `${BASE}/blog`, priority: 0.7, changeFrequency: "weekly" },
@@ -49,6 +53,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date(b.publishedAt),
   }))
 
+  const activityEntries: MetadataRoute.Sitemap = activities.map((a) => ({
+    url: `${BASE}/things-to-do/${a.slug}`,
+    priority: 0.65,
+    changeFrequency: "monthly",
+    lastModified: new Date(),
+  }))
+
   const seoEntries: MetadataRoute.Sitemap = seoPages.map((s) => ({
     url: `${BASE}/${s.slug}`,
     priority: 0.6,
@@ -56,5 +67,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date(),
   }))
 
-  return [...staticEntries, ...destEntries, ...pkgEntries, ...blogEntries, ...seoEntries]
+  return [
+    ...staticEntries,
+    ...destEntries,
+    ...pkgEntries,
+    ...blogEntries,
+    ...activityEntries,
+    ...seoEntries,
+  ]
 }

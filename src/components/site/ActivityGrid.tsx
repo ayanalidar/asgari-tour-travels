@@ -136,7 +136,16 @@ export function ActivityGrid({
                   transition={{ duration: 0.4, delay: i * 0.04 }}
                   className="lift group relative overflow-hidden rounded-2xl glass"
                 >
-                  {destSlug ? (
+                  {a.slug ? (
+                    <Link href={`/things-to-do/${a.slug}`} className="flex flex-col">
+                      <ActivityContent
+                        a={a}
+                        image={image}
+                        destName={destName}
+                        gradientSlug={destSlug || a.slug}
+                      />
+                    </Link>
+                  ) : destSlug ? (
                     <Link href={`/destinations/${destSlug}`} className="flex flex-col">
                       <ActivityContent
                         a={a}

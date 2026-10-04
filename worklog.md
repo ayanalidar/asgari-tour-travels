@@ -407,3 +407,43 @@ Unresolved / Next Steps:
 - Landing page cumulative compilation: still very heavy; OOMs on warm servers. Consider lazy-loading client components with `next/dynamic` in a future round to reduce initial bundle weight.
 - Future feature ideas: interactive destination map with pins, weather/season widget, multi-language (Hindi/Arabic), user accounts + saved trips/wishlist, payment integration, destination "nearby" recommendations, activity detail pages (/things-to-do/[slug])
 - The recurring 15-min cron job (job_id: 434245) will continue picking up these in subsequent rounds
+
+---
+Task ID: 10 (cron review round 6)
+Agent: web-dev reviewer (cron)
+Task: QA verification, activity detail pages, activity API, sitemap updates, things-to-do links
+
+Current Project Status:
+- Project stable from Tasks 1-9 (36 destinations all with images, 10 packages, 10 blog posts, 14 testimonials, 15 activities, full CMS, comparison tool, gallery lightbox, scroll progress, global search, booking modal, testimonials carousel, blog search, FAQ search, newsletter popup, CSV export, section dividers)
+- Dev server confirmed compiling & serving key routes (200 responses via curl)
+- Memory constraint persists: 4GB sandbox OOM-kills next-server during cumulative route compilation. Each page compiles correctly individually on a fresh server.
+- Lint remained 100% clean throughout (0 errors, 0 warnings)
+
+Work Log:
+- **QA**: Verified server starts, routes return 200 (/things-to-do, activity detail pages). Confirmed the Activities table now has 15 rows (seeded in round 5). The /things-to-do page was previously linking activity cards to destination pages, not activity detail pages (since none existed).
+
+NEW FEATURES BUILT:
+1. **Activity Detail Pages** (src/app/things-to-do/[slug]/page.tsx) — new SEO detail page for each of the 15 activities. Features: hero with background image + breadcrumb + category/difficulty/location badges + title + short description; info chips (duration, difficulty, best season); markdown description rendering; destination link card ("Located in [destination]" with explore button); enquiry sidebar ("Book this experience"); WhatsApp help sidebar; related activities grid (3 cards with images, category badges, hover effects); back-to-list link. Full generateMetadata with metaTitle/metaDescription. TouristAttraction JSON-LD structured data. Verified: /things-to-do/gondola-ride-gulmarg → 200 (304KB, "About this experience" + "Book this experience" + "Located in" + "More Experiences" + "Related" confirmed). Also verified: /things-to-do/wazwan-cooking-class → 200.
+
+2. **Single Activity API** (src/app/api/public/activities/[slug]/route.ts) — new GET endpoint returning a single activity by slug with its destination included. Parses images JSON array. Returns 404 if not found. Verified: returns correct title for gondola-ride-gulmarg.
+
+3. **Things-to-Do Links Updated** (src/components/site/ActivityGrid.tsx) — updated the activity card link logic to link to /things-to-do/[slug] (activity detail page) instead of /destinations/[slug] (destination page). Falls back to destination link only if no activity slug. Verified: /things-to-do page now contains href="/things-to-do/gondola-ride-gulmarg", href="/things-to-do/bactrian-camel-ride", href="/things-to-do/astrophotography-hanle", href="/things-to-do/houseboat-stay-dal-lake", href="/things-to-do/indus-river-rafting" links.
+
+4. **Sitemap Updated** (src/app/sitemap.ts) — added all 15 activity detail URLs to the sitemap with priority 0.65. Also added the /compare and /plan-your-trip static pages (priority 0.8). Verified: sitemap.xml contains things-to-do/astrophotography-hanle, things-to-do/bactrian-camel-ride, things-to-do/gondola-ride-gulmarg, etc.
+
+5. **Query Functions Added** (src/lib/queries.ts) — added getActivityBySlug(slug) returning activity + destination, and getRelatedActivities(slug, category, limit) with 2-tier fallback (same category → any other activity). Used by the activity detail page.
+
+Verification Results:
+- `bun run lint` → 0 errors, 0 warnings ✓
+- `/things-to-do/gondola-ride-gulmarg` → 200 (304KB, all sections confirmed) ✓
+- `/things-to-do/wazwan-cooking-class` → 200 ✓
+- `/api/public/activities/gondola-ride-gulmarg` → correct title returned ✓
+- `/things-to-do` → links to activity detail pages confirmed ✓
+- `/sitemap.xml` → activity URLs + /compare + /plan-your-trip confirmed ✓
+- Destination pages already have "More in [region]" nearby destinations section (verified existed) ✓
+
+Unresolved / Next Steps:
+- agent-browser full-page verification: persistently blocked by 4GB RAM (server OOM-killed when Chrome loads; each page verified via curl instead)
+- Landing page cumulative compilation: still very heavy; consider lazy-loading client components with `next/dynamic` in a future round
+- Future feature ideas: interactive destination map with pins, weather/season widget, multi-language, user accounts + saved trips/wishlist, payment integration, package comparison tool, activity booking calendar
+- The recurring 15-min cron job (job_id: 434245) will continue picking up these in subsequent rounds
