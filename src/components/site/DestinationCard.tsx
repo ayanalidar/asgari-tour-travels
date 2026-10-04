@@ -13,6 +13,7 @@ import {
 } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { DestinationImage } from "./DestinationImage"
+import { BestForTags } from "./BestForTags"
 import type { DestinationT } from "@/lib/types"
 
 interface DestinationCardProps {
@@ -144,6 +145,18 @@ export function DestinationCard({
             <p className="line-clamp-2 text-sm text-muted-foreground">
               {destination.shortDescription}
             </p>
+          )}
+          {/* Best-for tags */}
+          {!compact && (
+            <BestForTags
+              slug={destination.slug}
+              name={destination.name}
+              category={destination.category}
+              region={destination.region}
+              altitude={destination.altitude}
+              bestTimeToVisit={destination.bestTimeToVisit}
+              thingsToDoCount={destination.thingsToDo?.length}
+            />
           )}
           {/* Quick stats row */}
           <div className="flex items-center gap-3 text-[11px] text-muted-foreground">

@@ -26,6 +26,7 @@ import { EnquiryForm } from "@/components/site/EnquiryForm"
 import { CTASection } from "@/components/site/CTASection"
 import { TestimonialCard } from "@/components/site/TestimonialCard"
 import { BookingButton } from "@/components/site/BookingButton"
+import { QuickQuoteWidget } from "@/components/site/QuickQuoteWidget"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
@@ -439,8 +440,14 @@ export default async function PackageDetailPage({ params }: Props) {
       </section>
 
       <section className="container mx-auto max-w-7xl px-4 sm:px-6 pb-16 sm:pb-24">
-        <CTASection phone={settings.phone_primary} />
+        <CTASection phone={settings.phone_primary} whatsapp={settings.social_whatsapp} />
       </section>
+
+      <QuickQuoteWidget
+        context={p.title}
+        phone={settings.phone_primary}
+        whatsapp={settings.social_whatsapp}
+      />
     </PublicLayout>
   )
 }

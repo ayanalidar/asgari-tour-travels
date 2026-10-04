@@ -82,6 +82,29 @@ export function PackageCard({ pkg, index = 0 }: PackageCardProps) {
 
         {/* Body */}
         <div className="flex flex-1 flex-col gap-3 p-4">
+          {/* Rating + save badge */}
+          <div className="flex items-center justify-between">
+            {pkg.rating > 0 && (
+              <div className="flex items-center gap-1">
+                <div className="flex">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star
+                      key={i}
+                      className={`size-3 ${i < Math.round(pkg.rating) ? "fill-amber-400 text-amber-400" : "fill-muted text-muted-foreground"}`}
+                    />
+                  ))}
+                </div>
+                <span className="text-xs font-semibold text-foreground">{pkg.rating.toFixed(1)}</span>
+                <span className="text-[10px] text-muted-foreground">({pkg.reviewCount})</span>
+              </div>
+            )}
+            {hasDiscount && (
+              <span className="rounded-full bg-accent/10 px-2 py-0.5 text-[10px] font-medium text-accent">
+                Save {formatPrice((pkg.price - (pkg.discountPrice as number)), pkg.currency)}
+              </span>
+            )}
+          </div>
+
           <p className="line-clamp-2 text-sm text-muted-foreground">
             {pkg.shortDescription}
           </p>

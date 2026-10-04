@@ -27,6 +27,7 @@ import { CTASection } from "@/components/site/CTASection"
 import { EnquiryForm } from "@/components/site/EnquiryForm"
 import { GalleryLightbox } from "@/components/site/GalleryLightbox"
 import { DestinationStatsBar } from "@/components/site/DestinationStatsBar"
+import { QuickQuoteWidget } from "@/components/site/QuickQuoteWidget"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 
@@ -350,8 +351,14 @@ export default async function DestinationDetailPage({ params }: Props) {
       )}
 
       <section className="container mx-auto max-w-7xl px-4 sm:px-6 pb-16 sm:pb-24">
-        <CTASection phone={settings.phone_primary} />
+        <CTASection phone={settings.phone_primary} whatsapp={settings.social_whatsapp} />
       </section>
+
+      <QuickQuoteWidget
+        context={d.name}
+        phone={settings.phone_primary}
+        whatsapp={settings.social_whatsapp}
+      />
     </PublicLayout>
   )
 }

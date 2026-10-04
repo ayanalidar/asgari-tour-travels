@@ -483,3 +483,37 @@ Unresolved / Next Steps:
 - Landing page is now lighter with lazy-loading but still heavy; further optimization could include code-splitting more components
 - Future feature ideas: interactive destination map with pins, weather/season widget, multi-language, user accounts + saved trips/wishlist, payment integration, package comparison tool, activity booking calendar, destination "best for" tags (honeymoon/adventure/family)
 - The recurring 15-min cron job (job_id: 434245) will continue picking up these in subsequent rounds
+
+---
+Task ID: 12 (cron review round 8)
+Agent: web-dev reviewer (cron)
+Task: QA verification, destination best-for tags, enhanced package card, floating quick-quote widget
+
+Current Project Status:
+- Project stable from Tasks 1-11 (36 destinations, 10 packages, 10 blog posts, 14 testimonials, 15 activities with detail pages, full CMS, lazy-loaded landing, destination stats bar, admin testimonials widget, enhanced CTA, global search, booking modal, comparison tool, gallery lightbox, scroll progress, blog/FAQ search, newsletter popup, CSV export, section dividers)
+- Dev server confirmed compiling & serving key routes (200 responses via curl)
+- Memory constraint persists: 4GB sandbox OOM-kills next-server during cumulative route compilation. Each page compiles correctly individually on a fresh server.
+- Lint remained 100% clean throughout (0 errors, 0 warnings)
+
+Work Log:
+- **QA**: Verified server starts, routes return 200. Confirmed landing page lazy-loading working from round 7.
+
+NEW FEATURES & STYLING BUILT:
+1. **Destination "Best For" Tags** (src/components/site/BestForTags.tsx) — new component that derives 2-4 relevant tags from each destination's attributes (slug, category, altitude, best time). 8 tag types with color-coded badges + icons: Honeymoon (Heart, rose), Adventure (Mountain, saffron), Family (Users, emerald), Photography (Camera, amber), Skiing (Snowflake, sky), Nature (Leaf, emerald), Spiritual (Sparkles, purple), Cultural (Compass, accent). Logic: Srinagar/Dal Lake/Gulmarg/Pahalgam → Honeymoon; high-altitude/passes → Adventure; Gulmarg → Skiing; lakes/monasteries → Photography; easy-access → Family; meadows/lakes/gardens → Nature; shrines/temples → Spiritual; towns/gardens → Cultural. Framer Motion staggered entrance. Added to DestinationCard body (non-compact mode). Verified: /destinations page shows Honeymoon + Adventure + Family + Photography + Nature + Cultural on cards.
+
+2. **Enhanced PackageCard** (updated src/components/site/PackageCard.tsx) — added a rating + save row at the top of the card body: 5 star icons (filled based on rounded rating), numeric rating, review count, and a "Save ₹X" badge showing the exact savings amount (in emerald). This gives users instant at-a-glance price comparison and social proof. Verified: "Save" badge confirmed on package pages.
+
+3. **Floating Quick-Quote Widget** (src/components/site/QuickQuoteWidget.tsx + added to destination & package pages) — a smart floating widget that appears after the user scrolls past 40% of the viewport. Collapsed state: a glass-strong floating pill button ("Quick Quote · FREE") with a dismiss option. Expanded state: a mini form (name + phone) with a gradient header showing the page context, a submit button ("Get callback in 24h"), and a footer with direct Call/WhatsApp links. Submits to /api/public/leads with source="quick-quote-widget". Success state with animated checkmark. Added to both destination detail and package detail pages (passes the destination/package name as context + phone/whatsapp from settings). Verified: "QuickQuote" confirmed on /destinations/srinagar.
+
+4. **CTASection whatsapp prop** — updated destination and package pages to pass `whatsapp={settings.social_whatsapp}` to the CTASection component, enabling the WhatsApp link in the enhanced CTA (built in round 7).
+
+Verification Results:
+- `bun run lint` → 0 errors, 0 warnings ✓
+- `/destinations` → 200 (544KB, "Honeymoon" + "Adventure" + "Family" + "Photography" + "Nature" + "Cultural" best-for tags confirmed) ✓
+- `/destinations/srinagar` → 200 (416KB, "QuickQuote" + "Honeymoon" + "Save" confirmed) ✓
+- Package pages → "Book Now" + "Save" confirmed (enhanced card) ✓
+
+Unresolved / Next Steps:
+- agent-browser full-page verification: persistently blocked by 4GB RAM (server OOM-killed when Chrome loads; each page verified via curl instead)
+- Future feature ideas: interactive destination map with pins, weather/season widget, multi-language, user accounts + saved trips/wishlist, payment integration, package comparison tool, activity booking calendar, destination "best for" filtering on /destinations page
+- The recurring 15-min cron job (job_id: 434245) will continue picking up these in subsequent rounds
