@@ -60,3 +60,5 @@ export async function DELETE(req: NextRequest, ctx: RouteCtx) {
     return err("Delete failed: " + (e?.message || "unknown"), 500);
   }
 }
+
+export const dynamic = "force-dynamic";

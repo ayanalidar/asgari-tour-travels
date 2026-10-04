@@ -6,7 +6,7 @@ import { PageHeader } from "@/components/site/PageHeader"
 import { BlogExplorer } from "@/components/site/BlogExplorer"
 import { Breadcrumbs } from "@/components/site/Breadcrumbs"
 
-export const revalidate = 600
+export const dynamic = "force-dynamic"
 
 export const metadata: Metadata = {
   title: "Travel Blog - Kashmir & Ladakh Stories, Tips & Guides",

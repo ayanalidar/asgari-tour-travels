@@ -15,7 +15,7 @@ import { CTASection } from "@/components/site/CTASection"
 import { Breadcrumbs } from "@/components/site/Breadcrumbs"
 import { Button } from "@/components/ui/button"
 
-export const revalidate = 600
+export const dynamic = "force-dynamic"
 
 export const metadata: Metadata = {
   title: "Ladakh Tour Packages - Leh, Pangong, Nubra & Khardung La",

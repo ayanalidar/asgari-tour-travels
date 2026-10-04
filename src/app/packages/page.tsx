@@ -6,7 +6,7 @@ import { PageHeader } from "@/components/site/PageHeader"
 import { PackagesExplorer } from "@/components/site/PackagesExplorer"
 import { Breadcrumbs } from "@/components/site/Breadcrumbs"
 
-export const revalidate = 600
+export const dynamic = "force-dynamic"
 
 export const metadata: Metadata = {
   title: "Tour Packages - Kashmir & Ladakh Holiday Deals",

@@ -143,3 +143,5 @@ export async function POST(req: NextRequest) {
     return err("Google sync failed: " + (e?.message || "unknown"), 500);
   }
 }
+
+export const dynamic = "force-dynamic";

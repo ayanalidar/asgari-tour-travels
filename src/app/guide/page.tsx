@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/guide" },
 }
 
-export const revalidate = 600
+export const dynamic = "force-dynamic"
 
 // Famous Kashmir goods/products
 const KASHMIR_GOODS = [

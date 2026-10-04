@@ -15,3 +15,5 @@ export async function GET(req: NextRequest) {
   const expected = process.env.ADMIN_TOKEN || "asgari-admin-2024";
   return ok({ authed: auth === expected });
 }
+
+export const dynamic = "force-dynamic";

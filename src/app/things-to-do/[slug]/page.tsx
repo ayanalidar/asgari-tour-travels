@@ -26,7 +26,7 @@ import { destinationImage } from "@/lib/image-map"
 import { ImageWithFallback } from "@/components/site/ImageWithFallback"
 import { safeArray } from "@/lib/types"
 
-export const revalidate = 600
+export const dynamic = "force-dynamic"
 
 interface Props {
   params: Promise<{ slug: string }>

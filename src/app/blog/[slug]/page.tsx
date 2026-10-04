@@ -12,7 +12,7 @@ import { CTASection } from "@/components/site/CTASection"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 
-export const revalidate = 600
+export const dynamic = "force-dynamic"
 
 interface Props {
   params: Promise<{ slug: string }>

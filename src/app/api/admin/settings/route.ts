@@ -64,3 +64,5 @@ export async function PUT(req: NextRequest) {
     return err("Failed: " + (e?.message || "unknown"), 500);
   }
 }
+
+export const dynamic = "force-dynamic";

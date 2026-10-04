@@ -43,3 +43,5 @@ export async function POST(req: Request) {
     return err("Payment init failed: " + (e?.message || "unknown"), 500)
   }
 }
+
+export const dynamic = "force-dynamic";

@@ -8,7 +8,7 @@ import { FaqExplorer } from "@/components/site/FaqExplorer"
 import { Phone, MessageCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
-export const revalidate = 600
+export const dynamic = "force-dynamic"
 
 export const metadata: Metadata = {
   title: "FAQ - Kashmir & Ladakh Travel Questions",

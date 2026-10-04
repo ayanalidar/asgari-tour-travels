@@ -17,3 +17,5 @@ export async function GET(
     images: safeArray(activity.images),
   })
 }
+
+export const dynamic = "force-dynamic";

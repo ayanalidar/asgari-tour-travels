@@ -14,3 +14,5 @@ export async function GET(req: NextRequest) {
     return err("Failed: " + (e?.message || "unknown"), 500);
   }
 }
+
+export const dynamic = "force-dynamic";

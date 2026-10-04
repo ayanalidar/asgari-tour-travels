@@ -153,3 +153,5 @@ export async function GET(req: NextRequest) {
     return err("Stats failed: " + (e?.message || "unknown"), 500);
   }
 }
+
+export const dynamic = "force-dynamic";

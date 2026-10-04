@@ -9,6 +9,9 @@ import {
 
 const BASE = "https://asgaritravels.com"
 
+// Force dynamic - don't prerender at build time (needs DATABASE_URL)
+export const dynamic = "force-dynamic"
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [destinations, packages, posts, seoPages, activities] = await Promise.all([
     getAllDestinations(),

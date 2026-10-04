@@ -14,7 +14,7 @@ import { Breadcrumbs } from "@/components/site/Breadcrumbs"
 import { EnquiryForm } from "@/components/site/EnquiryForm"
 import { Button } from "@/components/ui/button"
 
-export const revalidate = 600
+export const dynamic = "force-dynamic"
 
 export const metadata: Metadata = {
   title: "Contact Us - Asgari Tour & Travels",

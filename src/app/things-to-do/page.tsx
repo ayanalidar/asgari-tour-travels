@@ -13,7 +13,7 @@ import { Badge } from "@/components/ui/badge"
 import { ActivityGrid } from "@/components/site/ActivityGrid"
 import { safeArray } from "@/lib/types"
 
-export const revalidate = 600
+export const dynamic = "force-dynamic"
 
 export const metadata: Metadata = {
   title: "Things To Do - Kashmir & Ladakh Activities & Experiences",

@@ -54,3 +54,5 @@ export async function GET(req: Request) {
 
   return ok({ destinations, packages, blog });
 }
+
+export const dynamic = "force-dynamic";

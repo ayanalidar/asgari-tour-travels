@@ -39,7 +39,7 @@ import {
 import { formatPrice, type TourPackageT } from "@/lib/types"
 import { packageImage } from "@/lib/image-map"
 
-export const revalidate = 600
+export const dynamic = "force-dynamic"
 
 interface Props {
   params: Promise<{ slug: string }>

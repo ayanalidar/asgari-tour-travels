@@ -29,3 +29,5 @@ export async function POST(req: NextRequest, ctx: RouteCtx) {
   });
   return ok({ lead: { ...updated, notes } }, 201);
 }
+
+export const dynamic = "force-dynamic";
