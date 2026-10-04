@@ -6,6 +6,9 @@ generator client {
 }
 
 datasource db {
+  // Uses "sqlite" for local dev, but DATABASE_URL can point to PostgreSQL on Vercel
+  // For Vercel deployment, set DATABASE_URL to your cloud database URL
+  // and change provider to "postgresql" if using Postgres
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }

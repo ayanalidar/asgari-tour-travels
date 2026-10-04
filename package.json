@@ -4,13 +4,17 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3000 2>&1 | tee dev.log",
-    "build": "next build && cp -r .next/static .next/standalone/.next/ && cp -r public .next/standalone/",
+    "build": "prisma generate && next build",
+    "postbuild": "cp -r .next/static .next/standalone/.next/ 2>/dev/null; cp -r public .next/standalone/ 2>/dev/null; true",
     "start": "NODE_ENV=production bun .next/standalone/server.js 2>&1 | tee server.log",
     "lint": "eslint .",
     "db:push": "prisma db push --accept-data-loss",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
-    "db:reset": "prisma migrate reset"
+    "db:reset": "prisma migrate reset",
+    "postinstall": "prisma generate",
+    "seed": "bun run prisma/seed.ts",
+    "seed:all": "bun run prisma/seed.ts && bun run prisma/seed-more-blog.ts && bun run prisma/seed-more-packages.ts && bun run prisma/seed-more-packages-2.ts && bun run prisma/seed-more-testimonials.ts && bun run prisma/seed-activities.ts && bun run prisma/seed-honeymoon-family-packages.ts && bun run scripts/map-all-images.ts"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

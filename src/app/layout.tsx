@@ -24,6 +24,9 @@ const mono = JetBrains_Mono({
   display: "swap",
 });
 
+// Force dynamic rendering so pages don't try to access the database during build
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://asgaritravels.com"),
   title: {
