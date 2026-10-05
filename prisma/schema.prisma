@@ -283,6 +283,27 @@ model HostingerLog {
   createdAt       DateTime @default(now())
 }
 
+// ============================================================
+// OFFERS - Popup offer cards shown to visitors
+// ============================================================
+model Offer {
+  id              String   @id @default(cuid())
+  title           String   // e.g. "₹3,000 OFF your first trip"
+  subtitle        String?  // e.g. "Use code WELCOME3000 at checkout"
+  description     String?  // longer description
+  couponCode      String   @unique // e.g. "WELCOME3000"
+  discountText    String?  // e.g. "₹3,000 OFF" or "15% OFF"
+  ctaText         String   @default("Claim Offer Now")
+  ctaHref         String   @default("/packages")
+  image           String?  // optional offer image
+  bgColor         String?  // optional gradient color
+  expiryDate      DateTime? // when offer expires (for countdown)
+  isActive        Boolean  @default(true)
+  showDelay       Int      @default(8) // seconds before showing
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
 // Keep User model for potential admin auth
 model User {
   id        String   @id @default(cuid())

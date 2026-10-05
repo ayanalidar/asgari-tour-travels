@@ -16,6 +16,7 @@ import {
   MessageSquareQuote,
   Settings,
   Sparkles,
+  Gift,
   ChevronLeft,
   X,
 } from "lucide-react";
@@ -39,6 +40,7 @@ const NAV: NavItem[] = [
   { href: "/admin/gallery", label: "Gallery", icon: Images, group: "Content" },
   { href: "/admin/seo-pages", label: "SEO Pages", icon: Search, group: "Content" },
   { href: "/admin/coupons", label: "Coupons", icon: TicketPercent, group: "Marketing" },
+  { href: "/admin/offers", label: "Popup Offers", icon: Gift, group: "Marketing" },
   { href: "/admin/testimonials", label: "Testimonials", icon: Star, group: "Marketing" },
   { href: "/admin/reviews", label: "Google Reviews", icon: MessageSquareQuote, group: "Marketing" },
   { href: "/admin/settings", label: "Settings", icon: Settings, group: "System" },
